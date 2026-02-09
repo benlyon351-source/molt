@@ -283,7 +283,7 @@ export default function Home() {
         </button>
 
         <div className="hidden items-center gap-8 md:flex">
-          {["Home", "How We Work", "Results", "About", "Contact"].map((item, index) => (
+          {["Home", "How We Work", "Industries", "About", "Contact"].map((item, index) => (
             <button
               key={item}
               onClick={() => scrollToSection(index)}
@@ -341,7 +341,7 @@ export default function Home() {
 
         <div className="flex flex-1 flex-col justify-center px-8">
           <div className="space-y-6">
-            {["Home", "How We Work", "Results", "About", "Contact"].map((item, index) => (
+            {["Home", "How We Work", "Industries", "About", "Contact"].map((item, index) => (
               <button
                 key={item}
                 onClick={() => scrollToSection(index)}
