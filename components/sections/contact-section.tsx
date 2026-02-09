@@ -162,6 +162,10 @@ export function ContactSection() {
                 {submitSuccess && (
                   <p className="mt-3 text-center font-mono text-sm text-foreground/80">We'll be in touch to schedule your scoping session.</p>
                 )}
+                <p className="mt-4 text-center font-mono text-xs leading-relaxed text-foreground/50">
+                  We'll schedule a 30-minute scoping session to clarify the outcome, audience, and constraints — then
+                  outline a practical first release. No commitment at this stage.
+                </p>
               </div>
             </form>
           </div>

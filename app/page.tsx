@@ -288,9 +288,8 @@ export default function Home() {
             </h1>
             <p className="mb-8 max-w-lg animate-in fade-in slide-in-from-bottom-4 text-base leading-relaxed text-foreground/90 duration-1000 delay-200 md:text-lg">
               <span className="text-pretty">
-                Most corporate training gets clicked through and forgotten. MOLT changes that — bespoke, expert-designed
-                e-learning that delivers on your business objectives, engages like social content, and delivered x10
-                faster.
+                Bespoke e-learning designed for your business outcomes, built to engage like the content your people
+                actually choose to watch — and delivered at a speed and price that makes the old way hard to justify.
               </span>
             </p>
             <div className="flex animate-in fade-in slide-in-from-bottom-4 flex-col gap-4 duration-1000 delay-300 sm:flex-row sm:items-center">
@@ -301,8 +300,8 @@ export default function Home() {
               >
                 Book a scoping session
               </MagneticButton>
-              <MagneticButton size="lg" variant="secondary" onClick={() => scrollToSection(2)}>
-                Explore ready-made courses
+              <MagneticButton size="lg" variant="secondary" onClick={() => scrollToSection(1)}>
+                See how we work
               </MagneticButton>
             </div>
           </div>
