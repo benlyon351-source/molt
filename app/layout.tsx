@@ -24,7 +24,7 @@ const _moulay = localFont({
 })
 
 export const metadata: Metadata = {
-  title: "MOLT | Bespoke E-Learning Built Around Your World",
+  title: "MOLT | Bespoke e-Learning",
   description:
     "Shed the forgettable. MOLT delivers bespoke, practitioner-designed e-learning — engaging, outcome-driven, and ready to launch at speed.",
   keywords: [
@@ -38,7 +38,7 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: "MOLT" }],
   openGraph: {
-    title: "MOLT | Bespoke E-Learning Built Around Your World",
+    title: "MOLT | Bespoke e-Learning",
     description:
       "Shed the forgettable. MOLT delivers bespoke, practitioner-designed e-learning — engaging, outcome-driven, and ready to launch at speed.",
     url: "https://molt.com",
@@ -47,7 +47,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "MOLT | Bespoke E-Learning Built Around Your World",
+    title: "MOLT | Bespoke e-Learning",
     description:
       "Shed the forgettable. MOLT delivers bespoke, practitioner-designed e-learning — engaging, outcome-driven, and ready to launch at speed.",
   },
