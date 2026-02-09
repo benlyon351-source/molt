@@ -12,7 +12,7 @@ export function WorkSection() {
     >
       <div className="mx-auto w-full max-w-7xl">
         <div
-          className={`mb-8 transition-all duration-700 md:mb-10 ${
+          className={`mb-6 transition-all duration-700 md:mb-8 ${
             isVisible ? "translate-x-0 opacity-100" : "-translate-x-12 opacity-0"
           }`}
         >
@@ -25,67 +25,74 @@ export function WorkSection() {
           </p>
         </div>
 
-        <div className="space-y-3 md:space-y-2">
-          {[
-            {
-              number: "01",
-              title: "Hospitality & Tourism",
-              category: "Seasonal onboarding, service standards, frontline readiness",
-              year: "",
-              direction: "left",
-            },
-            {
-              number: "02",
-              title: "Retail & Multi-Site",
-              category: "Store consistency, product knowledge, area manager capability",
-              year: "",
-              direction: "right",
-            },
-            {
-              number: "03",
-              title: "Financial Services",
-              category: "Regulatory compliance, adviser development, customer outcomes",
-              year: "",
-              direction: "left",
-            },
-            {
-              number: "04",
-              title: "Technology & Digital",
-              category: "Customer success, technical onboarding, remote team alignment",
-              year: "",
-              direction: "right",
-            },
-            {
-              number: "05",
-              title: "Public Sector",
-              category: "Compliance that lands, service standards, policy rollout at speed",
-              year: "",
-              direction: "left",
-            },
-            {
-              number: "06",
-              title: "Healthcare & Life Sciences",
-              category: "Patient safety, clinical compliance, continuing professional development",
-              year: "",
-              direction: "right",
-            },
-            {
-              number: "07",
-              title: "Manufacturing & Logistics",
-              category: "Safety-critical training, operational SOPs, supply chain readiness",
-              year: "",
-              direction: "left",
-            },
-            {
-              number: "08",
-              title: "Professional Services",
-              category: "Methodology adoption, client delivery standards, knowledge sharing at scale",
-              year: "",
-              direction: "right",
-            },
-          ].map((project, i) => (
-            <ProjectCard key={i} project={project} index={i} isVisible={isVisible} />
-          ))}
+        <div className="grid grid-cols-1 md:grid-cols-2 md:gap-x-16 lg:gap-x-24">
+          {(() => {
+            const industries = [
+              {
+                number: "01",
+                title: "Hospitality & Tourism",
+                category: "Seasonal onboarding, service standards, frontline readiness",
+              },
+              {
+                number: "02",
+                title: "Retail & Multi-Site",
+                category: "Store consistency, product knowledge, area manager capability",
+              },
+              {
+                number: "03",
+                title: "Financial Services",
+                category: "Regulatory compliance, adviser development, customer outcomes",
+              },
+              {
+                number: "04",
+                title: "Technology & Digital",
+                category: "Customer success, technical onboarding, remote team alignment",
+              },
+              {
+                number: "05",
+                title: "Public Sector",
+                category: "Compliance that lands, service standards, policy rollout at speed",
+              },
+              {
+                number: "06",
+                title: "Healthcare & Life Sciences",
+                category: "Patient safety, clinical compliance, continuing professional development",
+              },
+              {
+                number: "07",
+                title: "Manufacturing & Logistics",
+                category: "Safety-critical training, operational SOPs, supply chain readiness",
+              },
+              {
+                number: "08",
+                title: "Professional Services",
+                category: "Methodology adoption, client delivery standards, knowledge sharing at scale",
+              },
+            ]
+            const leftCol = industries.slice(0, 4)
+            const rightCol = industries.slice(4)
+            return (
+              <>
+                {/* Mobile: single stacked list */}
+                <div className="space-y-3 md:hidden">
+                  {industries.map((item, i) => (
+                    <ProjectCard key={i} project={item} index={i} isVisible={isVisible} />
+                  ))}
+                </div>
+                {/* Desktop: two columns */}
+                <div className="hidden md:block">
+                  {leftCol.map((item, i) => (
+                    <ProjectCard key={i} project={item} index={i} isVisible={isVisible} />
+                  ))}
+                </div>
+                <div className="hidden md:block">
+                  {rightCol.map((item, i) => (
+                    <ProjectCard key={i + 4} project={item} index={i + 4} isVisible={isVisible} />
+                  ))}
+                </div>
+              </>
+            )
+          })()}
         </div>
       </div>
     </section>
@@ -97,38 +104,32 @@ function ProjectCard({
   index,
   isVisible,
 }: {
-  project: { number: string; title: string; category: string; year: string; direction: string }
+  project: { number: string; title: string; category: string }
   index: number
   isVisible: boolean
 }) {
+  const direction = index % 2 === 0 ? "left" : "right"
   const getRevealClass = () => {
     if (!isVisible) {
-      return project.direction === "left" ? "-translate-x-16 opacity-0" : "translate-x-16 opacity-0"
+      return direction === "left" ? "-translate-x-16 opacity-0" : "translate-x-16 opacity-0"
     }
     return "translate-x-0 opacity-100"
   }
 
   return (
     <div
-      className={`group flex items-center justify-between border-b border-foreground/10 py-4 transition-all duration-700 hover:border-foreground/20 md:py-3 ${getRevealClass()}`}
-      style={{
-        transitionDelay: `${index * 150}ms`,
-        marginLeft: index % 2 === 0 ? "0" : "auto",
-        maxWidth: index % 2 === 0 ? "85%" : "90%",
-      }}
+      className={`group flex items-baseline gap-3 border-b border-foreground/10 py-3 transition-all duration-700 hover:border-foreground/20 md:gap-4 md:py-4 ${getRevealClass()}`}
+      style={{ transitionDelay: `${index * 150}ms` }}
     >
-      <div className="flex items-baseline gap-4 md:gap-8">
-        <span className="font-mono text-sm text-foreground/30 transition-colors group-hover:text-foreground/50 md:text-base">
-          {project.number}
-        </span>
-        <div>
-          <h3 className="mb-0.5 font-serif text-xl uppercase text-foreground transition-transform duration-300 group-hover:translate-x-2 md:text-2xl lg:text-3xl">
-            {project.title}
-          </h3>
-          <p className="font-sans text-xs text-foreground md:text-sm">{project.category}</p>
-        </div>
+      <span className="font-mono text-xs text-foreground/30 transition-colors group-hover:text-foreground/50 md:text-sm">
+        {project.number}
+      </span>
+      <div>
+        <h3 className="mb-0.5 font-serif text-lg uppercase text-foreground transition-transform duration-300 group-hover:translate-x-2 md:text-xl lg:text-2xl">
+          {project.title}
+        </h3>
+        <p className="font-sans text-xs leading-relaxed text-foreground/70 md:text-sm">{project.category}</p>
       </div>
-      <span className="font-mono text-xs text-foreground/30 md:text-sm">{project.year}</span>
     </div>
   )
 }
