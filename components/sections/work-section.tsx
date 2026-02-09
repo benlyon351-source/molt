@@ -17,7 +17,7 @@ export function WorkSection() {
           }`}
         >
           <h2 className="mb-2 font-serif text-5xl uppercase tracking-tight text-foreground md:text-6xl lg:text-7xl">
-            Proof
+            Results
           </h2>
           <p className="font-mono text-sm text-foreground/60 md:text-base">/ From real-world pressure to launch-ready learning</p>
         </div>
