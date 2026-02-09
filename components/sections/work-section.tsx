@@ -87,7 +87,7 @@ function ProjectCard({
           <h3 className="mb-1 font-serif text-2xl uppercase text-foreground transition-transform duration-300 group-hover:translate-x-2 md:text-3xl lg:text-4xl">
             {project.title}
           </h3>
-          <p className="font-mono text-xs text-foreground/50 md:text-sm">{project.category}</p>
+          <p className="font-sans text-xs text-foreground md:text-sm">{project.category}</p>
         </div>
       </div>
       <span className="font-mono text-xs text-foreground/30 md:text-sm">{project.year}</span>

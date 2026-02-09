@@ -35,11 +35,11 @@ export function AboutSection({ scrollToSection }: { scrollToSection?: (index: nu
               }`}
               style={{ transitionDelay: "200ms" }}
             >
-              <p className="max-w-md text-sm leading-relaxed text-foreground/90 md:text-lg">
+              <p className="max-w-md font-sans text-sm leading-relaxed text-foreground md:text-lg">
                 Founded by ex-management consultants who spent years watching training fail to land. We built MOLT to
                 fix that — combining practitioner-led learning design with an AI-powered production workflow.
               </p>
-              <p className="max-w-md text-sm leading-relaxed text-foreground/90 md:text-lg">
+              <p className="max-w-md font-sans text-sm leading-relaxed text-foreground md:text-lg">
                 The result: bespoke e-learning that launches in weeks, not months — and costs less than you'd expect.
               </p>
             </div>

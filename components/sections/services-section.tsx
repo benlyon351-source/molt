@@ -92,7 +92,7 @@ function ServiceCard({
         <span className="font-mono text-xs text-foreground/60">0{index + 1}</span>
       </div>
       <h3 className="mb-2 font-serif text-2xl uppercase text-foreground md:text-3xl">{service.title}</h3>
-      <p className="max-w-sm text-sm leading-relaxed text-foreground/80 md:text-base">{service.description}</p>
+      <p className="max-w-sm font-sans text-sm leading-relaxed text-foreground md:text-base">{service.description}</p>
     </div>
   )
 }
