@@ -61,7 +61,6 @@ export function ContactSection() {
       if (response.ok) {
         setSubmitSuccess(true)
         setFormData({ firstName: "", lastName: "", email: "", company: "", phone: "", message: "" })
-        setTimeout(() => setSubmitSuccess(false), 5000)
       } else {
         setSubmitError(true)
       }
@@ -132,135 +131,163 @@ export function ContactSection() {
             </div>
           </div>
 
-          {/* Right side - Minimal form */}
+          {/* Right side - Form or Success Panel */}
           <div className="flex flex-col justify-center">
-            <form onSubmit={handleSubmit} className="space-y-4 md:space-y-6">
-              {/* First name + Last name — side by side on desktop */}
-              <div
-                className={`grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-6 transition-all duration-700 ${
-                  isVisible ? "translate-x-0 opacity-100" : "translate-x-16 opacity-0"
-                }`}
-                style={{ transitionDelay: "200ms" }}
-              >
-                <div>
-                  <label className="mb-1 block font-mono text-xs text-foreground/60 md:mb-2">First name *</label>
-                  <input
-                    type="text"
-                    value={formData.firstName}
-                    onChange={(e) => setFormData({ ...formData, firstName: e.target.value })}
-                    required
-                    className="w-full border-b border-foreground/30 bg-transparent py-1.5 font-sans text-sm text-foreground placeholder:text-foreground/40 focus:border-foreground/50 focus:outline-none md:py-2 md:text-base"
-                    placeholder="First name"
-                  />
-                </div>
-                <div>
-                  <label className="mb-1 block font-mono text-xs text-foreground/60 md:mb-2">Last name *</label>
-                  <input
-                    type="text"
-                    value={formData.lastName}
-                    onChange={(e) => setFormData({ ...formData, lastName: e.target.value })}
-                    required
-                    className="w-full border-b border-foreground/30 bg-transparent py-1.5 font-sans text-sm text-foreground placeholder:text-foreground/40 focus:border-foreground/50 focus:outline-none md:py-2 md:text-base"
-                    placeholder="Last name"
-                  />
-                </div>
-              </div>
-
-              {/* Email */}
-              <div
-                className={`transition-all duration-700 ${
-                  isVisible ? "translate-x-0 opacity-100" : "translate-x-16 opacity-0"
-                }`}
-                style={{ transitionDelay: "350ms" }}
-              >
-                <label className="mb-1 block font-mono text-xs text-foreground/60 md:mb-2">Email *</label>
-                <input
-                  type="email"
-                  value={formData.email}
-                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                  required
-                  className="w-full border-b border-foreground/30 bg-transparent py-1.5 font-sans text-sm text-foreground placeholder:text-foreground/40 focus:border-foreground/50 focus:outline-none md:py-2 md:text-base"
-                  placeholder="your@email.com"
-                />
-              </div>
-
-              {/* Company */}
-              <div
-                className={`transition-all duration-700 ${
-                  isVisible ? "translate-x-0 opacity-100" : "translate-x-16 opacity-0"
-                }`}
-                style={{ transitionDelay: "500ms" }}
-              >
-                <label className="mb-1 block font-mono text-xs text-foreground/60 md:mb-2">Company</label>
-                <input
-                  type="text"
-                  value={formData.company}
-                  onChange={(e) => setFormData({ ...formData, company: e.target.value })}
-                  className="w-full border-b border-foreground/30 bg-transparent py-1.5 font-sans text-sm text-foreground placeholder:text-foreground/40 focus:border-foreground/50 focus:outline-none md:py-2 md:text-base"
-                  placeholder="Your organisation"
-                />
-              </div>
-
-              {/* Phone */}
-              <div
-                className={`transition-all duration-700 ${
-                  isVisible ? "translate-x-0 opacity-100" : "translate-x-16 opacity-0"
-                }`}
-                style={{ transitionDelay: "575ms" }}
-              >
-                <label className="mb-1 block font-mono text-xs text-foreground/60 md:mb-2">Phone</label>
-                <input
-                  type="tel"
-                  value={formData.phone}
-                  onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                  className="w-full border-b border-foreground/30 bg-transparent py-1.5 font-sans text-sm text-foreground placeholder:text-foreground/40 focus:border-foreground/50 focus:outline-none md:py-2 md:text-base"
-                  placeholder="Phone number"
-                />
-              </div>
-
-              {/* Message */}
-              <div
-                className={`transition-all duration-700 ${
-                  isVisible ? "translate-x-0 opacity-100" : "translate-x-16 opacity-0"
-                }`}
-                style={{ transitionDelay: "650ms" }}
-              >
-                <label className="mb-1 block font-mono text-xs text-foreground/60 md:mb-2">Message</label>
-                <textarea
-                  rows={3}
-                  value={formData.message}
-                  onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                  className="w-full border-b border-foreground/30 bg-transparent py-1.5 font-sans text-sm text-foreground placeholder:text-foreground/40 focus:border-foreground/50 focus:outline-none md:py-2 md:text-base"
-                  placeholder="What business challenge are you trying to solve?"
-                />
-              </div>
-
-              {/* Submit */}
-              <div
-                className={`transition-all duration-700 ${
-                  isVisible ? "translate-y-0 opacity-100" : "translate-y-12 opacity-0"
-                }`}
-                style={{ transitionDelay: "800ms" }}
-              >
-                <MagneticButton
-                  variant="primary"
-                  size="lg"
-                  className="w-full disabled:opacity-50"
-                  onClick={isSubmitting ? undefined : undefined}
-                >
-                  {isSubmitting ? "Sending..." : "Book a scoping session"}
-                </MagneticButton>
-                {submitSuccess && (
-                  <p className="mt-3 text-center font-mono text-sm text-foreground/80">{"We'll be in touch to schedule your scoping session."}</p>
-                )}
-                {submitError && (
-                  <p className="mt-3 text-center font-mono text-sm text-destructive">{"Something went wrong. Please email us at hello@justmolt.com instead."}</p>
-                )}
-                <p className="mt-4 text-center font-mono text-xs leading-relaxed text-foreground/50">
-                  {"We'll schedule a 30-minute scoping session to clarify the outcome, audience, and constraints — then outline a practical first release. No commitment at this stage."}
+            {submitSuccess ? (
+              <div className="flex flex-col justify-center space-y-6 animate-in fade-in slide-in-from-bottom-8 duration-700 md:space-y-8">
+                <h3 className="font-serif text-3xl uppercase tracking-tight text-foreground md:text-5xl lg:text-6xl">
+                  Thank you
+                </h3>
+                <p className="max-w-md font-sans text-base leading-relaxed text-foreground md:text-lg">
+                  {"We'll be in touch shortly to schedule your scoping session."}
                 </p>
+                <p className="font-sans text-base text-foreground md:text-lg">
+                  {"In the meantime, follow us on "}
+                  <a
+                    href="https://www.linkedin.com/company/just-molt/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="border-b border-foreground/50 transition-colors hover:border-foreground hover:text-foreground/80"
+                  >
+                    LinkedIn
+                  </a>
+                </p>
+                <div>
+                  <MagneticButton
+                    variant="secondary"
+                    size="lg"
+                    onClick={() => setSubmitSuccess(false)}
+                  >
+                    Dismiss
+                  </MagneticButton>
+                </div>
               </div>
-            </form>
+            ) : (
+              <form onSubmit={handleSubmit} className="space-y-4 md:space-y-6">
+                {/* First name + Last name — side by side on desktop */}
+                <div
+                  className={`grid grid-cols-1 gap-4 transition-all duration-700 md:grid-cols-2 md:gap-6 ${
+                    isVisible ? "translate-x-0 opacity-100" : "translate-x-16 opacity-0"
+                  }`}
+                  style={{ transitionDelay: "200ms" }}
+                >
+                  <div>
+                    <label className="mb-1 block font-mono text-xs text-foreground/60 md:mb-2">First name *</label>
+                    <input
+                      type="text"
+                      value={formData.firstName}
+                      onChange={(e) => setFormData({ ...formData, firstName: e.target.value })}
+                      required
+                      className="w-full border-b border-foreground/30 bg-transparent py-1.5 font-sans text-sm text-foreground placeholder:text-foreground/40 focus:border-foreground/50 focus:outline-none md:py-2 md:text-base"
+                      placeholder="First name"
+                    />
+                  </div>
+                  <div>
+                    <label className="mb-1 block font-mono text-xs text-foreground/60 md:mb-2">Last name *</label>
+                    <input
+                      type="text"
+                      value={formData.lastName}
+                      onChange={(e) => setFormData({ ...formData, lastName: e.target.value })}
+                      required
+                      className="w-full border-b border-foreground/30 bg-transparent py-1.5 font-sans text-sm text-foreground placeholder:text-foreground/40 focus:border-foreground/50 focus:outline-none md:py-2 md:text-base"
+                      placeholder="Last name"
+                    />
+                  </div>
+                </div>
+
+                {/* Email */}
+                <div
+                  className={`transition-all duration-700 ${
+                    isVisible ? "translate-x-0 opacity-100" : "translate-x-16 opacity-0"
+                  }`}
+                  style={{ transitionDelay: "350ms" }}
+                >
+                  <label className="mb-1 block font-mono text-xs text-foreground/60 md:mb-2">Email *</label>
+                  <input
+                    type="email"
+                    value={formData.email}
+                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                    required
+                    className="w-full border-b border-foreground/30 bg-transparent py-1.5 font-sans text-sm text-foreground placeholder:text-foreground/40 focus:border-foreground/50 focus:outline-none md:py-2 md:text-base"
+                    placeholder="your@email.com"
+                  />
+                </div>
+
+                {/* Company */}
+                <div
+                  className={`transition-all duration-700 ${
+                    isVisible ? "translate-x-0 opacity-100" : "translate-x-16 opacity-0"
+                  }`}
+                  style={{ transitionDelay: "500ms" }}
+                >
+                  <label className="mb-1 block font-mono text-xs text-foreground/60 md:mb-2">Company</label>
+                  <input
+                    type="text"
+                    value={formData.company}
+                    onChange={(e) => setFormData({ ...formData, company: e.target.value })}
+                    className="w-full border-b border-foreground/30 bg-transparent py-1.5 font-sans text-sm text-foreground placeholder:text-foreground/40 focus:border-foreground/50 focus:outline-none md:py-2 md:text-base"
+                    placeholder="Your organisation"
+                  />
+                </div>
+
+                {/* Phone */}
+                <div
+                  className={`transition-all duration-700 ${
+                    isVisible ? "translate-x-0 opacity-100" : "translate-x-16 opacity-0"
+                  }`}
+                  style={{ transitionDelay: "575ms" }}
+                >
+                  <label className="mb-1 block font-mono text-xs text-foreground/60 md:mb-2">Phone</label>
+                  <input
+                    type="tel"
+                    value={formData.phone}
+                    onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                    className="w-full border-b border-foreground/30 bg-transparent py-1.5 font-sans text-sm text-foreground placeholder:text-foreground/40 focus:border-foreground/50 focus:outline-none md:py-2 md:text-base"
+                    placeholder="Phone number"
+                  />
+                </div>
+
+                {/* Message */}
+                <div
+                  className={`transition-all duration-700 ${
+                    isVisible ? "translate-x-0 opacity-100" : "translate-x-16 opacity-0"
+                  }`}
+                  style={{ transitionDelay: "650ms" }}
+                >
+                  <label className="mb-1 block font-mono text-xs text-foreground/60 md:mb-2">Message</label>
+                  <textarea
+                    rows={3}
+                    value={formData.message}
+                    onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                    className="w-full border-b border-foreground/30 bg-transparent py-1.5 font-sans text-sm text-foreground placeholder:text-foreground/40 focus:border-foreground/50 focus:outline-none md:py-2 md:text-base"
+                    placeholder="What business challenge are you trying to solve?"
+                  />
+                </div>
+
+                {/* Submit */}
+                <div
+                  className={`transition-all duration-700 ${
+                    isVisible ? "translate-y-0 opacity-100" : "translate-y-12 opacity-0"
+                  }`}
+                  style={{ transitionDelay: "800ms" }}
+                >
+                  <MagneticButton
+                    variant="primary"
+                    size="lg"
+                    className="w-full disabled:opacity-50"
+                    onClick={isSubmitting ? undefined : undefined}
+                  >
+                    {isSubmitting ? "Sending..." : "Book a scoping session"}
+                  </MagneticButton>
+                  {submitError && (
+                    <p className="mt-3 text-center font-mono text-sm text-destructive">{"Something went wrong. Please email us at hello@justmolt.com instead."}</p>
+                  )}
+                  <p className="mt-4 text-center font-mono text-xs leading-relaxed text-foreground/50">
+                    {"We'll schedule a 30-minute scoping session to clarify the outcome, audience, and constraints — then outline a practical first release. No commitment at this stage."}
+                  </p>
+                </div>
+              </form>
+            )}
           </div>
         </div>
       </div>
