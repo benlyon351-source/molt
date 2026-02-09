@@ -1,6 +1,6 @@
 "use client"
 
-import { Mail } from "lucide-react"
+import { Mail, Linkedin } from "lucide-react"
 import { useReveal } from "@/hooks/use-reveal"
 import { useState, type FormEvent } from "react"
 import { MagneticButton } from "@/components/magnetic-button"
@@ -30,22 +30,28 @@ export function ContactSection() {
     setSubmitError(false)
 
     try {
+      const fields = [
+        { name: "firstname", value: formData.firstName },
+        { name: "lastname", value: formData.lastName },
+        { name: "email", value: formData.email },
+      ]
+
+      if (formData.company) fields.push({ name: "company", value: formData.company })
+      if (formData.phone) fields.push({ name: "phone", value: formData.phone })
+      if (formData.message) fields.push({ name: "message", value: formData.message })
+
       const response = await fetch(
         "https://api-eu1.hsforms.com/submissions/v3/integration/submit/147773050/2b23bb55-2f3f-42cc-b2ca-cc85290d519e",
         {
           method: "POST",
-          headers: { "Content-Type": "application/json" },
+          mode: "cors",
+          headers: {
+            "Content-Type": "application/json",
+          },
           body: JSON.stringify({
-            fields: [
-              { objectTypeId: "0-1", name: "firstname", value: formData.firstName },
-              { objectTypeId: "0-1", name: "lastname", value: formData.lastName },
-              { objectTypeId: "0-1", name: "email", value: formData.email },
-              { objectTypeId: "0-1", name: "company", value: formData.company },
-              { objectTypeId: "0-1", name: "phone", value: formData.phone },
-              { objectTypeId: "0-1", name: "message", value: formData.message },
-            ],
+            fields,
             context: {
-              pageUri: window.location.href,
+              pageUri: typeof window !== "undefined" ? window.location.href : "",
               pageName: "MOLT Contact Form",
             },
           }),
@@ -91,7 +97,7 @@ export function ContactSection() {
 
             <div className="space-y-4 md:space-y-8">
               <a
-                href="mailto:hello@molt.com"
+                href="mailto:hello@justmolt.com"
                 className={`group block transition-all duration-700 ${
                   isVisible ? "translate-x-0 opacity-100" : "-translate-x-16 opacity-0"
                 }`}
@@ -102,26 +108,27 @@ export function ContactSection() {
                   <span className="font-mono text-xs text-foreground/60">Email</span>
                 </div>
                 <p className="font-sans text-base text-foreground transition-colors group-hover:text-foreground/70 md:text-2xl">
-                  hello@molt.com
+                  hello@justmolt.com
                 </p>
               </a>
 
-              <div
-                className={`flex gap-2 pt-2 transition-all duration-700 md:pt-4 ${
+              <a
+                href="https://www.linkedin.com/company/just-molt/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`group block pt-2 transition-all duration-700 md:pt-4 ${
                   isVisible ? "translate-x-0 opacity-100" : "-translate-x-8 opacity-0"
                 }`}
                 style={{ transitionDelay: "500ms" }}
               >
-                {["LinkedIn"].map((social, i) => (
-                  <a
-                    key={social}
-                    href="#"
-                    className="border-b border-transparent font-mono text-xs text-foreground/60 transition-all hover:border-foreground/60 hover:text-foreground/90"
-                  >
-                    {social}
-                  </a>
-                ))}
-              </div>
+                <div className="mb-1 flex items-center gap-2">
+                  <Linkedin className="h-3 w-3 text-foreground/60" />
+                  <span className="font-mono text-xs text-foreground/60">LinkedIn</span>
+                </div>
+                <p className="font-sans text-base text-foreground transition-colors group-hover:text-foreground/70 md:text-2xl">
+                  {"Connect with us on LinkedIn \u2192"}
+                </p>
+              </a>
             </div>
           </div>
 
@@ -247,7 +254,7 @@ export function ContactSection() {
                   <p className="mt-3 text-center font-mono text-sm text-foreground/80">{"We'll be in touch to schedule your scoping session."}</p>
                 )}
                 {submitError && (
-                  <p className="mt-3 text-center font-mono text-sm text-destructive">{"Something went wrong. Please email us at hello@molt.com instead."}</p>
+                  <p className="mt-3 text-center font-mono text-sm text-destructive">{"Something went wrong. Please email us at hello@justmolt.com instead."}</p>
                 )}
                 <p className="mt-4 text-center font-mono text-xs leading-relaxed text-foreground/50">
                   {"We'll schedule a 30-minute scoping session to clarify the outcome, audience, and constraints — then outline a practical first release. No commitment at this stage."}
