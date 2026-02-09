@@ -1,6 +1,8 @@
 "use client"
 
 import { useReveal } from "@/hooks/use-reveal"
+import type { LucideIcon } from "lucide-react"
+import { UtensilsCrossed, Store, Landmark, Monitor, Building2, HeartPulse, Factory, Briefcase } from "lucide-react"
 
 export function WorkSection() {
   const { ref, isVisible } = useReveal(0.3)
@@ -8,46 +10,91 @@ export function WorkSection() {
   return (
     <section
       ref={ref}
-      className="flex h-screen w-screen shrink-0 snap-start items-center px-6 pt-20 md:px-12 md:pt-0 lg:px-16"
+      className="flex w-full items-center px-6 py-20 md:h-screen md:w-screen md:shrink-0 md:snap-start md:px-12 md:py-20 lg:px-16"
     >
       <div className="mx-auto w-full max-w-7xl">
         <div
-          className={`mb-12 transition-all duration-700 md:mb-16 ${
+          className={`mb-6 transition-all duration-700 md:mb-8 ${
             isVisible ? "translate-x-0 opacity-100" : "-translate-x-12 opacity-0"
           }`}
         >
-          <h2 className="mb-2 font-serif text-5xl uppercase tracking-tight text-foreground md:text-6xl lg:text-7xl">
-            Results
+          <h2 className="mb-2 font-serif text-3xl uppercase tracking-tight text-foreground md:text-4xl lg:text-5xl">
+            Industries
           </h2>
-          <p className="font-mono text-sm text-foreground/60 md:text-base">/ From real-world pressure to launch-ready learning</p>
+          <p className="font-mono text-sm text-foreground/60 md:text-base">{"/ Great learning follows the same foundations \u2014 what changes is the context"}</p>
+          <p className="mt-3 max-w-xl font-sans text-sm leading-relaxed text-foreground md:mt-4 md:text-base">
+            MOLT adapts curriculum and content to your industry, your roles, and your pace of change.
+          </p>
         </div>
 
-        <div className="space-y-6 md:space-y-8">
-          {[
-            {
-              number: "01",
-              title: "Hospitality",
-              category: "200+ seasonal starters onboarded in 4 weeks. 94% completion rate.",
-              year: "",
-              direction: "left",
-            },
-            {
-              number: "02",
-              title: "Technology",
-              category: "Customer success practices standardised across regions. 30% reduction in escalations.",
-              year: "",
-              direction: "right",
-            },
-            {
-              number: "03",
-              title: "Financial Services",
-              category: "Compliance training people actually finished. 88% completion vs 42% previous year.",
-              year: "",
-              direction: "left",
-            },
-          ].map((project, i) => (
-            <ProjectCard key={i} project={project} index={i} isVisible={isVisible} />
-          ))}
+        <div className="grid grid-cols-1 md:grid-cols-2 md:gap-x-16 lg:gap-x-24">
+          {(() => {
+            const industries = [
+              {
+                icon: UtensilsCrossed,
+                title: "Hospitality & Tourism",
+                category: "Seasonal onboarding, service standards, frontline readiness",
+              },
+              {
+                icon: Store,
+                title: "Retail & Multi-Site",
+                category: "Store consistency, product knowledge, area manager capability",
+              },
+              {
+                icon: Landmark,
+                title: "Financial Services",
+                category: "Regulatory compliance, adviser development, customer outcomes",
+              },
+              {
+                icon: Monitor,
+                title: "Technology & Digital",
+                category: "Customer success, technical onboarding, remote team alignment",
+              },
+              {
+                icon: Building2,
+                title: "Public Sector",
+                category: "Compliance that lands, service standards, policy rollout at speed",
+              },
+              {
+                icon: HeartPulse,
+                title: "Healthcare & Life Sciences",
+                category: "Patient safety, clinical compliance, continuing professional development",
+              },
+              {
+                icon: Factory,
+                title: "Manufacturing & Logistics",
+                category: "Safety-critical training, operational SOPs, supply chain readiness",
+              },
+              {
+                icon: Briefcase,
+                title: "Professional Services",
+                category: "Methodology adoption, client delivery standards, knowledge sharing at scale",
+              },
+            ]
+            const leftCol = industries.slice(0, 4)
+            const rightCol = industries.slice(4)
+            return (
+              <>
+                {/* Mobile: single stacked list */}
+                <div className="space-y-3 md:hidden">
+                  {industries.map((item, i) => (
+                    <ProjectCard key={i} project={item} index={i} isVisible={isVisible} />
+                  ))}
+                </div>
+                {/* Desktop: two columns */}
+                <div className="hidden md:block">
+                  {leftCol.map((item, i) => (
+                    <ProjectCard key={i} project={item} index={i} isVisible={isVisible} />
+                  ))}
+                </div>
+                <div className="hidden md:block">
+                  {rightCol.map((item, i) => (
+                    <ProjectCard key={i + 4} project={item} index={i + 4} isVisible={isVisible} />
+                  ))}
+                </div>
+              </>
+            )
+          })()}
         </div>
       </div>
     </section>
@@ -59,38 +106,30 @@ function ProjectCard({
   index,
   isVisible,
 }: {
-  project: { number: string; title: string; category: string; year: string; direction: string }
+  project: { icon: LucideIcon; title: string; category: string }
   index: number
   isVisible: boolean
 }) {
+  const direction = index % 2 === 0 ? "left" : "right"
   const getRevealClass = () => {
     if (!isVisible) {
-      return project.direction === "left" ? "-translate-x-16 opacity-0" : "translate-x-16 opacity-0"
+      return direction === "left" ? "-translate-x-16 opacity-0" : "translate-x-16 opacity-0"
     }
     return "translate-x-0 opacity-100"
   }
 
   return (
     <div
-      className={`group flex items-center justify-between border-b border-foreground/10 py-6 transition-all duration-700 hover:border-foreground/20 md:py-8 ${getRevealClass()}`}
-      style={{
-        transitionDelay: `${index * 150}ms`,
-        marginLeft: index % 2 === 0 ? "0" : "auto",
-        maxWidth: index % 2 === 0 ? "85%" : "90%",
-      }}
+      className={`group flex items-center gap-3 border-b border-foreground/10 py-3 transition-all duration-700 hover:border-foreground/20 md:gap-4 md:py-4 ${getRevealClass()}`}
+      style={{ transitionDelay: `${index * 150}ms` }}
     >
-      <div className="flex items-baseline gap-4 md:gap-8">
-        <span className="font-mono text-sm text-foreground/30 transition-colors group-hover:text-foreground/50 md:text-base">
-          {project.number}
-        </span>
-        <div>
-          <h3 className="mb-1 font-serif text-2xl uppercase text-foreground transition-transform duration-300 group-hover:translate-x-2 md:text-3xl lg:text-4xl">
-            {project.title}
-          </h3>
-          <p className="font-sans text-xs text-foreground md:text-sm">{project.category}</p>
-        </div>
+      <project.icon className="h-8 w-8 shrink-0 text-foreground/30 transition-colors group-hover:text-foreground/50 md:h-10 md:w-10" />
+      <div>
+        <h3 className="mb-0.5 font-serif text-lg uppercase text-foreground transition-transform duration-300 group-hover:translate-x-2 md:text-xl lg:text-2xl">
+          {project.title}
+        </h3>
+        <p className="font-mono text-xs leading-relaxed text-foreground/70 md:text-sm">{project.category}</p>
       </div>
-      <span className="font-mono text-xs text-foreground/30 md:text-sm">{project.year}</span>
     </div>
   )
 }

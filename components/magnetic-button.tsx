@@ -8,6 +8,7 @@ interface MagneticButtonProps {
   className?: string
   variant?: "primary" | "secondary" | "ghost"
   size?: "default" | "lg"
+  disabled?: boolean
   onClick?: () => void
 }
 
@@ -16,6 +17,7 @@ export function MagneticButton({
   className = "",
   variant = "primary",
   size = "default",
+  disabled = false,
   onClick,
 }: MagneticButtonProps) {
   const ref = useRef<HTMLButtonElement>(null)
@@ -68,11 +70,14 @@ export function MagneticButton({
       onClick={onClick}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
+      disabled={disabled}
+      aria-disabled={disabled || undefined}
       className={`
         relative overflow-hidden rounded-full font-serif font-bold uppercase
         transition-all duration-300 ease-out will-change-transform
         ${variants[variant]}
         ${sizes[size]}
+        ${disabled ? "pointer-events-none opacity-50" : ""}
         ${className}
       `}
       style={{

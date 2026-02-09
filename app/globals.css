@@ -86,9 +86,9 @@
 
 @theme inline {
   /* optional: --font-sans, --font-serif, --font-mono if they are applied in the layout.tsx */
-  --font-sans: "ApercuPro", "Helvetica Neue", Arial, sans-serif;
-  --font-mono: "ApercuMonoProRegular", "Courier New", monospace;
-  --font-serif: "Moulay-Bold", "Arial Black", sans-serif;
+  --font-sans: var(--font-apercu-pro), "Helvetica Neue", Arial, sans-serif;
+  --font-mono: var(--font-apercu-mono), "Courier New", monospace;
+  --font-serif: var(--font-moulay), "Arial Black", sans-serif;
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -147,7 +147,13 @@
   section {
     transform: translateZ(0);
     will-change: transform;
-    contain: layout style paint;
+    contain: layout style;
+  }
+
+  @media (min-width: 768px) {
+    section {
+      contain: layout style paint;
+    }
   }
 
   button {

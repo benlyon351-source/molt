@@ -9,16 +9,28 @@ import { ServicesSection } from "@/components/sections/services-section"
 import { AboutSection } from "@/components/sections/about-section"
 import { ContactSection } from "@/components/sections/contact-section"
 import { MagneticButton } from "@/components/magnetic-button"
-import { useRef, useEffect, useState } from "react"
+import { useRef, useEffect, useState, useCallback } from "react"
+import { Menu, X } from "lucide-react"
 
 export default function Home() {
   const scrollContainerRef = useRef<HTMLDivElement>(null)
   const [currentSection, setCurrentSection] = useState(0)
   const [isLoaded, setIsLoaded] = useState(false)
+  const [isMobile, setIsMobile] = useState(false)
+  const [menuOpen, setMenuOpen] = useState(false)
   const touchStartY = useRef(0)
   const touchStartX = useRef(0)
   const shaderContainerRef = useRef<HTMLDivElement>(null)
   const scrollThrottleRef = useRef<number>()
+
+  // Detect mobile breakpoint
+  useEffect(() => {
+    const mql = window.matchMedia("(max-width: 767px)")
+    const onChange = (e: MediaQueryListEvent | MediaQueryList) => setIsMobile(e.matches)
+    onChange(mql)
+    mql.addEventListener("change", onChange)
+    return () => mql.removeEventListener("change", onChange)
+  }, [])
 
   useEffect(() => {
     const checkShaderReady = () => {
@@ -50,18 +62,31 @@ export default function Home() {
     }
   }, [])
 
-  const scrollToSection = (index: number) => {
-    if (scrollContainerRef.current) {
-      const sectionWidth = scrollContainerRef.current.offsetWidth
-      scrollContainerRef.current.scrollTo({
-        left: sectionWidth * index,
-        behavior: "smooth",
-      })
+  const scrollToSection = useCallback(
+    (index: number) => {
+      if (!scrollContainerRef.current) return
+
+      if (isMobile) {
+        const sections = scrollContainerRef.current.querySelectorAll(":scope > section")
+        if (sections[index]) {
+          sections[index].scrollIntoView({ behavior: "smooth", block: "start" })
+        }
+      } else {
+        const sectionWidth = scrollContainerRef.current.offsetWidth
+        scrollContainerRef.current.scrollTo({
+          left: sectionWidth * index,
+          behavior: "smooth",
+        })
+      }
       setCurrentSection(index)
-    }
-  }
+      setMenuOpen(false)
+    },
+    [isMobile]
+  )
 
   useEffect(() => {
+    if (isMobile) return // Let native vertical scroll work on mobile
+
     const handleTouchStart = (e: TouchEvent) => {
       touchStartY.current = e.touches[0].clientY
       touchStartX.current = e.touches[0].clientX
@@ -102,9 +127,11 @@ export default function Home() {
         container.removeEventListener("touchend", handleTouchEnd)
       }
     }
-  }, [currentSection])
+  }, [currentSection, isMobile, scrollToSection])
 
   useEffect(() => {
+    if (isMobile) return // Native vertical scroll on mobile
+
     const handleWheel = (e: WheelEvent) => {
       if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
         e.preventDefault()
@@ -136,7 +163,7 @@ export default function Home() {
         container.removeEventListener("wheel", handleWheel)
       }
     }
-  }, [currentSection])
+  }, [currentSection, isMobile])
 
   useEffect(() => {
     const handleScroll = () => {
@@ -148,9 +175,16 @@ export default function Home() {
           return
         }
 
-        const sectionWidth = scrollContainerRef.current.offsetWidth
-        const scrollLeft = scrollContainerRef.current.scrollLeft
-        const newSection = Math.round(scrollLeft / sectionWidth)
+        let newSection: number
+        if (isMobile) {
+          const sectionHeight = window.innerHeight
+          const scrollTop = scrollContainerRef.current.scrollTop
+          newSection = Math.round(scrollTop / sectionHeight)
+        } else {
+          const sectionWidth = scrollContainerRef.current.offsetWidth
+          const scrollLeft = scrollContainerRef.current.scrollLeft
+          newSection = Math.round(scrollLeft / sectionWidth)
+        }
 
         if (newSection !== currentSection && newSection >= 0 && newSection <= 4) {
           setCurrentSection(newSection)
@@ -173,10 +207,10 @@ export default function Home() {
         cancelAnimationFrame(scrollThrottleRef.current)
       }
     }
-  }, [currentSection])
+  }, [currentSection, isMobile])
 
   return (
-    <main className="relative h-screen w-full overflow-hidden bg-background">
+    <main className="relative h-screen w-full overflow-hidden bg-background md:overflow-hidden">
       <CustomCursor />
       <GrainOverlay />
 
@@ -225,8 +259,15 @@ export default function Home() {
         <div className="absolute inset-0 bg-[#070501]/40" />
       </div>
 
+      {/* Mobile gradient fade under navbar */}
+      <div
+        className={`pointer-events-none fixed left-0 right-0 top-0 z-40 h-24 bg-gradient-to-b from-background via-background/60 to-transparent transition-opacity duration-700 md:hidden ${
+          isLoaded ? "opacity-100" : "opacity-0"
+        }`}
+      />
+
       <nav
-        className={`fixed left-0 right-0 top-0 z-50 flex items-center justify-between px-6 py-6 transition-opacity duration-700 md:px-12 ${
+        className={`fixed left-0 right-0 top-0 z-50 flex items-center justify-between px-6 py-4 transition-opacity duration-700 md:px-12 md:py-6 ${
           isLoaded ? "opacity-100" : "opacity-0"
         }`}
       >
@@ -242,7 +283,7 @@ export default function Home() {
         </button>
 
         <div className="hidden items-center gap-8 md:flex">
-          {["Home", "How We Work", "Results", "About", "Contact"].map((item, index) => (
+          {["Home", "How We Work", "Industries", "About", "Contact"].map((item, index) => (
             <button
               key={item}
               onClick={() => scrollToSection(index)}
@@ -260,21 +301,82 @@ export default function Home() {
           ))}
         </div>
 
-        <MagneticButton variant="secondary" onClick={() => scrollToSection(4)}>
-          Book a scoping session
-        </MagneticButton>
+        {/* Desktop CTA */}
+        <div className="hidden md:block">
+          <MagneticButton variant="secondary" onClick={() => scrollToSection(4)}>
+            Book a scoping session
+          </MagneticButton>
+        </div>
+
+        {/* Mobile hamburger */}
+        <button
+          onClick={() => setMenuOpen(true)}
+          className="flex h-10 w-10 items-center justify-center rounded-full border border-foreground/10 bg-foreground/5 backdrop-blur-xl md:hidden"
+          aria-label="Open menu"
+        >
+          <Menu className="h-5 w-5 text-foreground" />
+        </button>
       </nav>
+
+      {/* Mobile fullscreen menu overlay */}
+      <div
+        className={`fixed inset-0 z-[60] flex flex-col bg-background/95 backdrop-blur-xl transition-all duration-500 md:hidden ${
+          menuOpen ? "pointer-events-auto opacity-100" : "pointer-events-none opacity-0"
+        }`}
+      >
+        <div className="flex items-center justify-between px-6 py-4">
+          <img
+            src="/images/molt-logo.gif"
+            alt="MOLT"
+            className="h-10 w-auto"
+          />
+          <button
+            onClick={() => setMenuOpen(false)}
+            className="flex h-10 w-10 items-center justify-center rounded-full border border-foreground/10 bg-foreground/5"
+            aria-label="Close menu"
+          >
+            <X className="h-5 w-5 text-foreground" />
+          </button>
+        </div>
+
+        <div className="flex flex-1 flex-col justify-center px-8">
+          <div className="space-y-6">
+            {["Home", "How We Work", "Industries", "About", "Contact"].map((item, index) => (
+              <button
+                key={item}
+                onClick={() => scrollToSection(index)}
+                className={`block font-serif text-3xl uppercase tracking-tight transition-colors ${
+                  currentSection === index ? "text-foreground" : "text-foreground/60 hover:text-foreground"
+                }`}
+              >
+                {item}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        <div className="px-8 pb-12">
+          <MagneticButton
+            size="lg"
+            variant="primary"
+            className="w-full"
+            onClick={() => scrollToSection(4)}
+          >
+            Book a scoping session
+          </MagneticButton>
+        </div>
+      </div>
 
       <div
         ref={scrollContainerRef}
         data-scroll-container
-        className={`relative z-10 flex h-screen overflow-x-auto overflow-y-hidden transition-opacity duration-700 ${
+        className={`relative z-10 transition-opacity duration-700 ${
           isLoaded ? "opacity-100" : "opacity-0"
-        }`}
+        } flex h-screen flex-col overflow-y-auto overflow-x-hidden md:flex-row md:overflow-x-auto md:overflow-y-hidden`}
         style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
       >
         {/* Hero Section */}
-        <section className="flex min-h-screen w-screen shrink-0 flex-col items-start justify-center px-6 pt-24 md:px-12">
+        <section className="flex min-h-screen w-full flex-col items-start justify-center px-6 pt-24 md:h-screen md:w-screen md:shrink-0 md:px-12">
           <div className="max-w-3xl">
             <h1 className="mb-6 animate-in fade-in slide-in-from-bottom-8 font-serif text-4xl uppercase leading-[1.1] tracking-tight text-foreground duration-1000 md:text-5xl lg:text-6xl">
               <span className="text-balance">
@@ -317,6 +419,13 @@ export default function Home() {
         <WorkSection />
         <AboutSection scrollToSection={scrollToSection} />
         <ContactSection />
+
+        {/* Footer */}
+        <footer className="flex w-full items-center justify-center px-6 py-8 md:hidden">
+          <p className="font-mono text-xs text-foreground/40">
+            {"© Just MOLT Ltd 2026"}
+          </p>
+        </footer>
       </div>
 
       <style jsx global>{`
