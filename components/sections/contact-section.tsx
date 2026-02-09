@@ -163,33 +163,33 @@ export function ContactSection() {
                 </div>
               </div>
             ) : (
-              <form onSubmit={handleSubmit} className="space-y-4 md:space-y-6">
+              <form onSubmit={handleSubmit} className="space-y-3 md:space-y-4">
                 {/* First name + Last name — side by side on desktop */}
                 <div
-                  className={`grid grid-cols-1 gap-4 transition-all duration-700 md:grid-cols-2 md:gap-6 ${
+                  className={`grid grid-cols-1 gap-3 transition-all duration-700 md:grid-cols-2 md:gap-4 ${
                     isVisible ? "translate-x-0 opacity-100" : "translate-x-16 opacity-0"
                   }`}
                   style={{ transitionDelay: "200ms" }}
                 >
                   <div>
-                    <label className="mb-1 block font-mono text-xs text-foreground/60 md:mb-2">First name *</label>
+                    <label className="mb-0.5 block font-mono text-xs text-foreground/60 md:mb-1">First name *</label>
                     <input
                       type="text"
                       value={formData.firstName}
                       onChange={(e) => setFormData({ ...formData, firstName: e.target.value })}
                       required
-                      className="w-full border-b border-foreground/30 bg-transparent py-1.5 font-sans text-sm text-foreground placeholder:text-foreground/40 focus:border-foreground/50 focus:outline-none md:py-2 md:text-base"
+                      className="w-full border-b border-foreground/30 bg-transparent py-1 font-sans text-sm text-foreground placeholder:text-foreground/40 focus:border-foreground/50 focus:outline-none md:py-1.5 md:text-base"
                       placeholder="First name"
                     />
                   </div>
                   <div>
-                    <label className="mb-1 block font-mono text-xs text-foreground/60 md:mb-2">Last name *</label>
+                    <label className="mb-0.5 block font-mono text-xs text-foreground/60 md:mb-1">Last name *</label>
                     <input
                       type="text"
                       value={formData.lastName}
                       onChange={(e) => setFormData({ ...formData, lastName: e.target.value })}
                       required
-                      className="w-full border-b border-foreground/30 bg-transparent py-1.5 font-sans text-sm text-foreground placeholder:text-foreground/40 focus:border-foreground/50 focus:outline-none md:py-2 md:text-base"
+                      className="w-full border-b border-foreground/30 bg-transparent py-1 font-sans text-sm text-foreground placeholder:text-foreground/40 focus:border-foreground/50 focus:outline-none md:py-1.5 md:text-base"
                       placeholder="Last name"
                     />
                   </div>
@@ -202,13 +202,13 @@ export function ContactSection() {
                   }`}
                   style={{ transitionDelay: "350ms" }}
                 >
-                  <label className="mb-1 block font-mono text-xs text-foreground/60 md:mb-2">Email *</label>
+                  <label className="mb-0.5 block font-mono text-xs text-foreground/60 md:mb-1">Email *</label>
                   <input
                     type="email"
                     value={formData.email}
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                     required
-                    className="w-full border-b border-foreground/30 bg-transparent py-1.5 font-sans text-sm text-foreground placeholder:text-foreground/40 focus:border-foreground/50 focus:outline-none md:py-2 md:text-base"
+                    className="w-full border-b border-foreground/30 bg-transparent py-1 font-sans text-sm text-foreground placeholder:text-foreground/40 focus:border-foreground/50 focus:outline-none md:py-1.5 md:text-base"
                     placeholder="your@email.com"
                   />
                 </div>
@@ -220,12 +220,12 @@ export function ContactSection() {
                   }`}
                   style={{ transitionDelay: "500ms" }}
                 >
-                  <label className="mb-1 block font-mono text-xs text-foreground/60 md:mb-2">Company</label>
+                  <label className="mb-0.5 block font-mono text-xs text-foreground/60 md:mb-1">Company</label>
                   <input
                     type="text"
                     value={formData.company}
                     onChange={(e) => setFormData({ ...formData, company: e.target.value })}
-                    className="w-full border-b border-foreground/30 bg-transparent py-1.5 font-sans text-sm text-foreground placeholder:text-foreground/40 focus:border-foreground/50 focus:outline-none md:py-2 md:text-base"
+                    className="w-full border-b border-foreground/30 bg-transparent py-1 font-sans text-sm text-foreground placeholder:text-foreground/40 focus:border-foreground/50 focus:outline-none md:py-1.5 md:text-base"
                     placeholder="Your organisation"
                   />
                 </div>
@@ -237,12 +237,12 @@ export function ContactSection() {
                   }`}
                   style={{ transitionDelay: "575ms" }}
                 >
-                  <label className="mb-1 block font-mono text-xs text-foreground/60 md:mb-2">Phone</label>
+                  <label className="mb-0.5 block font-mono text-xs text-foreground/60 md:mb-1">Phone</label>
                   <input
                     type="tel"
                     value={formData.phone}
                     onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                    className="w-full border-b border-foreground/30 bg-transparent py-1.5 font-sans text-sm text-foreground placeholder:text-foreground/40 focus:border-foreground/50 focus:outline-none md:py-2 md:text-base"
+                    className="w-full border-b border-foreground/30 bg-transparent py-1 font-sans text-sm text-foreground placeholder:text-foreground/40 focus:border-foreground/50 focus:outline-none md:py-1.5 md:text-base"
                     placeholder="Phone number"
                   />
                 </div>
@@ -254,12 +254,12 @@ export function ContactSection() {
                   }`}
                   style={{ transitionDelay: "650ms" }}
                 >
-                  <label className="mb-1 block font-mono text-xs text-foreground/60 md:mb-2">Message</label>
+                  <label className="mb-0.5 block font-mono text-xs text-foreground/60 md:mb-1">Message</label>
                   <textarea
-                    rows={3}
+                    rows={2}
                     value={formData.message}
                     onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                    className="w-full border-b border-foreground/30 bg-transparent py-1.5 font-sans text-sm text-foreground placeholder:text-foreground/40 focus:border-foreground/50 focus:outline-none md:py-2 md:text-base"
+                    className="w-full border-b border-foreground/30 bg-transparent py-1 font-sans text-sm text-foreground placeholder:text-foreground/40 focus:border-foreground/50 focus:outline-none md:py-1.5 md:text-base"
                     placeholder="What business challenge are you trying to solve?"
                   />
                 </div>
@@ -280,9 +280,9 @@ export function ContactSection() {
                     {isSubmitting ? "Sending..." : "Book a scoping session"}
                   </MagneticButton>
                   {submitError && (
-                    <p className="mt-3 text-center font-mono text-sm text-destructive">{"Something went wrong. Please email us at hello@justmolt.com instead."}</p>
+                    <p className="mt-2 text-center font-mono text-sm text-destructive">{"Something went wrong. Please email us at hello@justmolt.com instead."}</p>
                   )}
-                  <p className="mt-4 text-center font-mono text-xs leading-relaxed text-foreground/50">
+                  <p className="mt-2 text-center font-mono text-xs leading-relaxed text-foreground/50">
                     {"We'll schedule a 30-minute scoping session to clarify the outcome, audience, and constraints — then outline a practical first release. No commitment at this stage."}
                   </p>
                 </div>
