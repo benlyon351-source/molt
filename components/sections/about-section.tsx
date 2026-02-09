@@ -21,11 +21,11 @@ export function AboutSection({ scrollToSection }: { scrollToSection?: (index: nu
               }`}
             >
               <h2 className="mb-3 font-serif text-3xl uppercase leading-[1.1] tracking-tight text-foreground md:mb-4 md:text-6xl lg:text-7xl">
-                We shed the
+                Built by
                 <br />
-                forgettable.
+                practitioners,
                 <br />
-                <span className="text-foreground/40">You grow your people.</span>
+                <span className="text-foreground/40">powered by AI</span>
               </h2>
             </div>
 
@@ -35,12 +35,12 @@ export function AboutSection({ scrollToSection }: { scrollToSection?: (index: nu
               }`}
               style={{ transitionDelay: "200ms" }}
             >
-              <p className="max-w-md text-sm leading-relaxed text-foreground/90 md:text-lg">
-                MOLT is a next-generation e-learning company. We deliver bespoke, expert-designed learning that's
-                engaging, outcome-driven, and created at speed.
+              <p className="max-w-md font-sans text-sm leading-relaxed text-foreground md:text-lg">
+                Founded by ex-management consultants who spent years watching training fail to land. We built MOLT to
+                fix that — combining practitioner-led learning design with an AI-powered production workflow.
               </p>
-              <p className="max-w-md text-sm leading-relaxed text-foreground/90 md:text-lg">
-                Our name comes from 'moult' — shedding what no longer serves so something new can grow.
+              <p className="max-w-md font-sans text-sm leading-relaxed text-foreground md:text-lg">
+                The result: bespoke e-learning that launches in weeks, not months — and costs less than you'd expect.
               </p>
             </div>
           </div>

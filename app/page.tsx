@@ -237,7 +237,7 @@ export default function Home() {
           <img
             src="/images/molt-logo.gif"
             alt="MOLT"
-            className="h-8 w-auto md:h-10"
+            className="h-10 w-auto md:h-14"
           />
         </button>
 
@@ -246,7 +246,7 @@ export default function Home() {
             <button
               key={item}
               onClick={() => scrollToSection(index)}
-              className={`group relative font-sans text-sm font-medium transition-colors ${
+              className={`group relative font-sans text-sm transition-colors ${
                 currentSection === index ? "text-foreground" : "text-foreground/80 hover:text-foreground"
               }`}
             >
@@ -274,23 +274,19 @@ export default function Home() {
         style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
       >
         {/* Hero Section */}
-        <section className="flex min-h-screen w-screen shrink-0 flex-col justify-end px-6 pb-16 pt-24 md:px-12 md:pb-24">
+        <section className="flex min-h-screen w-screen shrink-0 flex-col items-start justify-center px-6 pt-24 md:px-12">
           <div className="max-w-3xl">
-            <div className="mb-4 mt-16 inline-block animate-in fade-in slide-in-from-bottom-4 rounded-full border border-foreground/20 bg-foreground/15 px-4 py-1.5 backdrop-blur-md duration-700 md:mt-0">
-              <p className="font-mono text-xs text-foreground/90">Next-generation e-learning</p>
-            </div>
-            <h1 className="mb-4 animate-in fade-in slide-in-from-bottom-8 font-serif text-4xl uppercase leading-[1.1] tracking-tight text-foreground duration-1000 md:text-5xl lg:text-6xl">
+            <h1 className="mb-6 animate-in fade-in slide-in-from-bottom-8 font-serif text-4xl uppercase leading-[1.1] tracking-tight text-foreground duration-1000 md:text-5xl lg:text-6xl">
               <span className="text-balance">
-                Shed the forgettable.
+                Growth means shedding what no longer fits.
                 <br />
-                Grow your people.
+                It's time to MOLT.
               </span>
             </h1>
-            <p className="mb-8 max-w-lg animate-in fade-in slide-in-from-bottom-4 text-base leading-relaxed text-foreground/90 duration-1000 delay-200 md:text-lg">
+            <p className="mb-8 max-w-lg animate-in fade-in slide-in-from-bottom-4 font-sans text-base leading-relaxed text-foreground duration-1000 delay-200 md:text-lg">
               <span className="text-pretty">
-                Most corporate training gets clicked through and forgotten. MOLT changes that — bespoke, expert-designed
-                e-learning that delivers on your business objectives, engages like social content, and delivered x10
-                faster.
+                Bespoke e-learning designed for your business, built to engage like the content your people
+                actually choose to watch — and delivered faster than ever before.
               </span>
             </p>
             <div className="flex animate-in fade-in slide-in-from-bottom-4 flex-col gap-4 duration-1000 delay-300 sm:flex-row sm:items-center">
@@ -301,8 +297,8 @@ export default function Home() {
               >
                 Book a scoping session
               </MagneticButton>
-              <MagneticButton size="lg" variant="secondary" onClick={() => scrollToSection(2)}>
-                Explore ready-made courses
+              <MagneticButton size="lg" variant="secondary" onClick={() => scrollToSection(1)}>
+                See how we work
               </MagneticButton>
             </div>
           </div>

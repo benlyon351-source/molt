@@ -7,29 +7,63 @@ import { MagneticButton } from "@/components/magnetic-button"
 
 export function ContactSection() {
   const { ref, isVisible } = useReveal(0.3)
-  const [formData, setFormData] = useState({ name: "", email: "", message: "" })
+  const [formData, setFormData] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    company: "",
+    phone: "",
+    message: "",
+  })
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitSuccess, setSubmitSuccess] = useState(false)
+  const [submitError, setSubmitError] = useState(false)
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
 
-    // Basic validation
-    if (!formData.name || !formData.email || !formData.message) {
+    if (!formData.firstName || !formData.lastName || !formData.email) {
       return
     }
 
     setIsSubmitting(true)
+    setSubmitError(false)
 
-    // Simulate form submission (replace with actual API call later)
-    await new Promise((resolve) => setTimeout(resolve, 1500))
+    try {
+      const response = await fetch(
+        "https://api-eu1.hsforms.com/submissions/v3/integration/submit/147773050/2b23bb55-2f3f-42cc-b2ca-cc85290d519e",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            fields: [
+              { objectTypeId: "0-1", name: "firstname", value: formData.firstName },
+              { objectTypeId: "0-1", name: "lastname", value: formData.lastName },
+              { objectTypeId: "0-1", name: "email", value: formData.email },
+              { objectTypeId: "0-1", name: "company", value: formData.company },
+              { objectTypeId: "0-1", name: "phone", value: formData.phone },
+              { objectTypeId: "0-1", name: "message", value: formData.message },
+            ],
+            context: {
+              pageUri: window.location.href,
+              pageName: "MOLT Contact Form",
+            },
+          }),
+        }
+      )
 
-    setIsSubmitting(false)
-    setSubmitSuccess(true)
-    setFormData({ name: "", email: "", message: "" })
-
-    // Reset success message after 5 seconds
-    setTimeout(() => setSubmitSuccess(false), 5000)
+      if (response.ok) {
+        setSubmitSuccess(true)
+        setFormData({ firstName: "", lastName: "", email: "", company: "", phone: "", message: "" })
+        setTimeout(() => setSubmitSuccess(false), 5000)
+      } else {
+        setSubmitError(true)
+      }
+    } catch {
+      setSubmitError(true)
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   return (
@@ -67,7 +101,7 @@ export function ContactSection() {
                   <Mail className="h-3 w-3 text-foreground/60" />
                   <span className="font-mono text-xs text-foreground/60">Email</span>
                 </div>
-                <p className="text-base text-foreground transition-colors group-hover:text-foreground/70 md:text-2xl">
+                <p className="font-sans text-base text-foreground transition-colors group-hover:text-foreground/70 md:text-2xl">
                   hello@molt.com
                 </p>
               </a>
@@ -94,62 +128,112 @@ export function ContactSection() {
           {/* Right side - Minimal form */}
           <div className="flex flex-col justify-center">
             <form onSubmit={handleSubmit} className="space-y-4 md:space-y-6">
+              {/* First name + Last name — side by side on desktop */}
               <div
-                className={`transition-all duration-700 ${
+                className={`grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-6 transition-all duration-700 ${
                   isVisible ? "translate-x-0 opacity-100" : "translate-x-16 opacity-0"
                 }`}
                 style={{ transitionDelay: "200ms" }}
               >
-                <label className="mb-1 block font-mono text-xs text-foreground/60 md:mb-2">Name</label>
-                <input
-                  type="text"
-                  value={formData.name}
-                  onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                  required
-                  className="w-full border-b border-foreground/30 bg-transparent py-1.5 text-sm text-foreground placeholder:text-foreground/40 focus:border-foreground/50 focus:outline-none md:py-2 md:text-base"
-                  placeholder="Your name"
-                />
+                <div>
+                  <label className="mb-1 block font-mono text-xs text-foreground/60 md:mb-2">First name *</label>
+                  <input
+                    type="text"
+                    value={formData.firstName}
+                    onChange={(e) => setFormData({ ...formData, firstName: e.target.value })}
+                    required
+                    className="w-full border-b border-foreground/30 bg-transparent py-1.5 font-sans text-sm text-foreground placeholder:text-foreground/40 focus:border-foreground/50 focus:outline-none md:py-2 md:text-base"
+                    placeholder="First name"
+                  />
+                </div>
+                <div>
+                  <label className="mb-1 block font-mono text-xs text-foreground/60 md:mb-2">Last name *</label>
+                  <input
+                    type="text"
+                    value={formData.lastName}
+                    onChange={(e) => setFormData({ ...formData, lastName: e.target.value })}
+                    required
+                    className="w-full border-b border-foreground/30 bg-transparent py-1.5 font-sans text-sm text-foreground placeholder:text-foreground/40 focus:border-foreground/50 focus:outline-none md:py-2 md:text-base"
+                    placeholder="Last name"
+                  />
+                </div>
               </div>
 
+              {/* Email */}
               <div
                 className={`transition-all duration-700 ${
                   isVisible ? "translate-x-0 opacity-100" : "translate-x-16 opacity-0"
                 }`}
                 style={{ transitionDelay: "350ms" }}
               >
-                <label className="mb-1 block font-mono text-xs text-foreground/60 md:mb-2">Email</label>
+                <label className="mb-1 block font-mono text-xs text-foreground/60 md:mb-2">Email *</label>
                 <input
                   type="email"
                   value={formData.email}
                   onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                   required
-                  className="w-full border-b border-foreground/30 bg-transparent py-1.5 text-sm text-foreground placeholder:text-foreground/40 focus:border-foreground/50 focus:outline-none md:py-2 md:text-base"
+                  className="w-full border-b border-foreground/30 bg-transparent py-1.5 font-sans text-sm text-foreground placeholder:text-foreground/40 focus:border-foreground/50 focus:outline-none md:py-2 md:text-base"
                   placeholder="your@email.com"
                 />
               </div>
 
+              {/* Company */}
               <div
                 className={`transition-all duration-700 ${
                   isVisible ? "translate-x-0 opacity-100" : "translate-x-16 opacity-0"
                 }`}
                 style={{ transitionDelay: "500ms" }}
               >
+                <label className="mb-1 block font-mono text-xs text-foreground/60 md:mb-2">Company</label>
+                <input
+                  type="text"
+                  value={formData.company}
+                  onChange={(e) => setFormData({ ...formData, company: e.target.value })}
+                  className="w-full border-b border-foreground/30 bg-transparent py-1.5 font-sans text-sm text-foreground placeholder:text-foreground/40 focus:border-foreground/50 focus:outline-none md:py-2 md:text-base"
+                  placeholder="Your organisation"
+                />
+              </div>
+
+              {/* Phone */}
+              <div
+                className={`transition-all duration-700 ${
+                  isVisible ? "translate-x-0 opacity-100" : "translate-x-16 opacity-0"
+                }`}
+                style={{ transitionDelay: "575ms" }}
+              >
+                <label className="mb-1 block font-mono text-xs text-foreground/60 md:mb-2">Phone</label>
+                <input
+                  type="tel"
+                  value={formData.phone}
+                  onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                  className="w-full border-b border-foreground/30 bg-transparent py-1.5 font-sans text-sm text-foreground placeholder:text-foreground/40 focus:border-foreground/50 focus:outline-none md:py-2 md:text-base"
+                  placeholder="Phone number"
+                />
+              </div>
+
+              {/* Message */}
+              <div
+                className={`transition-all duration-700 ${
+                  isVisible ? "translate-x-0 opacity-100" : "translate-x-16 opacity-0"
+                }`}
+                style={{ transitionDelay: "650ms" }}
+              >
                 <label className="mb-1 block font-mono text-xs text-foreground/60 md:mb-2">Message</label>
                 <textarea
                   rows={3}
                   value={formData.message}
                   onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                  required
-                  className="w-full border-b border-foreground/30 bg-transparent py-1.5 text-sm text-foreground placeholder:text-foreground/40 focus:border-foreground/50 focus:outline-none md:py-2 md:text-base"
+                  className="w-full border-b border-foreground/30 bg-transparent py-1.5 font-sans text-sm text-foreground placeholder:text-foreground/40 focus:border-foreground/50 focus:outline-none md:py-2 md:text-base"
                   placeholder="What business challenge are you trying to solve?"
                 />
               </div>
 
+              {/* Submit */}
               <div
                 className={`transition-all duration-700 ${
                   isVisible ? "translate-y-0 opacity-100" : "translate-y-12 opacity-0"
                 }`}
-                style={{ transitionDelay: "650ms" }}
+                style={{ transitionDelay: "800ms" }}
               >
                 <MagneticButton
                   variant="primary"
@@ -160,8 +244,14 @@ export function ContactSection() {
                   {isSubmitting ? "Sending..." : "Book a scoping session"}
                 </MagneticButton>
                 {submitSuccess && (
-                  <p className="mt-3 text-center font-mono text-sm text-foreground/80">We'll be in touch to schedule your scoping session.</p>
+                  <p className="mt-3 text-center font-mono text-sm text-foreground/80">{"We'll be in touch to schedule your scoping session."}</p>
                 )}
+                {submitError && (
+                  <p className="mt-3 text-center font-mono text-sm text-destructive">{"Something went wrong. Please email us at hello@molt.com instead."}</p>
+                )}
+                <p className="mt-4 text-center font-mono text-xs leading-relaxed text-foreground/50">
+                  {"We'll schedule a 30-minute scoping session to clarify the outcome, audience, and constraints — then outline a practical first release. No commitment at this stage."}
+                </p>
               </div>
             </form>
           </div>

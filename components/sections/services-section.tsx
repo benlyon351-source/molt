@@ -26,22 +26,22 @@ export function ServicesSection() {
           {[
             {
               title: "Define",
-              description: "We start with a focused scoping session — what needs to change, for whom, and what good looks like when the learning lands.",
+              description: "A focused scoping session. We clarify the outcome, audience, and constraints — then outline a practical build plan.",
               direction: "top",
             },
             {
               title: "Design",
-              description: "We generate a curriculum blueprint mapped to business outcomes. You review and refine with us.",
+              description: "A curriculum blueprint mapped to business outcomes — your examples, your terminology. You review and refine with us.",
               direction: "right",
             },
             {
               title: "Produce",
-              description: "Scripts, interactive modules, and video lessons featuring AI avatars of your own people. Fast and unmistakably yours.",
+              description: "Scripts, video lessons, and interactive modules featuring AI avatars of your own people. Studio quality, without the studio timeline or budget.",
               direction: "left",
             },
             {
               title: "Deploy",
-              description: "Packaged for your LMS. Assign to learners, track completion, iterate as priorities change.",
+              description: "Packaged for your LMS. Assign, track, measure — and iterate as priorities change.",
               direction: "bottom",
             },
           ].map((service, i) => (
@@ -92,7 +92,7 @@ function ServiceCard({
         <span className="font-mono text-xs text-foreground/60">0{index + 1}</span>
       </div>
       <h3 className="mb-2 font-serif text-2xl uppercase text-foreground md:text-3xl">{service.title}</h3>
-      <p className="max-w-sm text-sm leading-relaxed text-foreground/80 md:text-base">{service.description}</p>
+      <p className="max-w-sm font-sans text-sm leading-relaxed text-foreground md:text-base">{service.description}</p>
     </div>
   )
 }
