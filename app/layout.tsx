@@ -24,9 +24,33 @@ const _moulay = localFont({
 })
 
 export const metadata: Metadata = {
-  title: "Shaders Landing Page",
-  description: "Created with v0",
-  generator: "v0.app",
+  title: "MOLT | Bespoke E-Learning Built Around Your World",
+  description:
+    "Shed the forgettable. MOLT delivers bespoke, practitioner-designed e-learning — engaging, outcome-driven, and ready to launch at speed.",
+  keywords: [
+    "e-learning",
+    "bespoke learning",
+    "corporate training",
+    "AI-powered learning",
+    "video-led training",
+    "learning design",
+    "MOLT",
+  ],
+  authors: [{ name: "MOLT" }],
+  openGraph: {
+    title: "MOLT | Bespoke E-Learning Built Around Your World",
+    description:
+      "Shed the forgettable. MOLT delivers bespoke, practitioner-designed e-learning — engaging, outcome-driven, and ready to launch at speed.",
+    url: "https://molt.com",
+    siteName: "MOLT",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "MOLT | Bespoke E-Learning Built Around Your World",
+    description:
+      "Shed the forgettable. MOLT delivers bespoke, practitioner-designed e-learning — engaging, outcome-driven, and ready to launch at speed.",
+  },
 }
 
 export default function RootLayout({

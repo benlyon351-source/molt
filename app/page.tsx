@@ -278,7 +278,9 @@ export default function Home() {
           <div className="max-w-3xl">
             <h1 className="mb-6 animate-in fade-in slide-in-from-bottom-8 font-serif text-4xl uppercase leading-[1.1] tracking-tight text-foreground duration-1000 md:text-5xl lg:text-6xl">
               <span className="text-balance">
-                Growth means shedding what no longer fits. It's time to MOLT.
+                Growth means shedding what no longer fits.
+                <br />
+                It's time to MOLT.
               </span>
             </h1>
             <p className="mb-8 max-w-lg animate-in fade-in slide-in-from-bottom-4 font-sans text-base leading-relaxed text-foreground duration-1000 delay-200 md:text-lg">
