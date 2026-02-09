@@ -81,7 +81,7 @@ export function AboutSection({ scrollToSection }: { scrollToSection?: (index: nu
         </div>
 
         <div
-          className={`mt-8 flex flex-wrap gap-3 transition-all duration-700 md:mt-16 md:gap-4 ${
+          className={`mt-8 hidden flex-wrap gap-3 transition-all duration-700 md:mt-16 md:flex md:gap-4 ${
             isVisible ? "translate-y-0 opacity-100" : "translate-y-12 opacity-0"
           }`}
           style={{ transitionDelay: "750ms" }}

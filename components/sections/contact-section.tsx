@@ -74,7 +74,7 @@ export function ContactSection() {
   return (
     <section
       ref={ref}
-      className="flex min-h-screen w-full items-center px-4 py-24 md:h-screen md:w-screen md:shrink-0 md:snap-start md:px-12 md:py-20 lg:px-16"
+      className="flex min-h-screen w-full items-center px-4 pb-12 pt-28 md:h-screen md:w-screen md:shrink-0 md:snap-start md:px-12 md:py-20 lg:px-16"
     >
       <div className="mx-auto w-full max-w-7xl">
         <div className="grid gap-8 md:grid-cols-[1.2fr_1fr] md:gap-16 lg:gap-24">

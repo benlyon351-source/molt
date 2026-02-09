@@ -259,6 +259,13 @@ export default function Home() {
         <div className="absolute inset-0 bg-[#070501]/40" />
       </div>
 
+      {/* Mobile gradient fade under navbar */}
+      <div
+        className={`pointer-events-none fixed left-0 right-0 top-0 z-40 h-24 bg-gradient-to-b from-background via-background/60 to-transparent transition-opacity duration-700 md:hidden ${
+          isLoaded ? "opacity-100" : "opacity-0"
+        }`}
+      />
+
       <nav
         className={`fixed left-0 right-0 top-0 z-50 flex items-center justify-between px-6 py-4 transition-opacity duration-700 md:px-12 md:py-6 ${
           isLoaded ? "opacity-100" : "opacity-0"
@@ -398,7 +405,7 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="absolute bottom-8 left-1/2 hidden -translate-x-1/2 animate-in fade-in duration-1000 delay-500 md:block">
+          <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-in fade-in duration-1000 delay-500">
             <div className="flex items-center gap-2">
               <p className="font-mono text-xs text-foreground/80">Scroll to explore</p>
               <div className="flex h-6 w-12 items-center justify-center rounded-full border border-foreground/20 bg-foreground/15 backdrop-blur-md">
@@ -412,6 +419,13 @@ export default function Home() {
         <WorkSection />
         <AboutSection scrollToSection={scrollToSection} />
         <ContactSection />
+
+        {/* Footer */}
+        <footer className="flex w-full items-center justify-center px-6 py-8 md:hidden">
+          <p className="font-mono text-xs text-foreground/40">
+            {"© Just MOLT Ltd 2026"}
+          </p>
+        </footer>
       </div>
 
       <style jsx global>{`
