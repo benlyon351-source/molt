@@ -125,10 +125,10 @@ function ProjectCard({
     >
       <project.icon className="h-8 w-8 shrink-0 text-foreground/30 transition-colors group-hover:text-foreground/50 md:h-10 md:w-10" />
       <div>
-        <h3 className="mb-0.5 font-mono text-lg uppercase text-foreground transition-transform duration-300 group-hover:translate-x-2 md:text-xl lg:text-2xl">
+        <h3 className="mb-0.5 font-serif text-lg uppercase text-foreground transition-transform duration-300 group-hover:translate-x-2 md:text-xl lg:text-2xl">
           {project.title}
         </h3>
-        <p className="font-sans text-xs leading-relaxed text-foreground/70 md:text-sm">{project.category}</p>
+        <p className="font-mono text-xs leading-relaxed text-foreground/70 md:text-sm">{project.category}</p>
       </div>
     </div>
   )
