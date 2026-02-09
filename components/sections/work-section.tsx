@@ -1,6 +1,8 @@
 "use client"
 
 import { useReveal } from "@/hooks/use-reveal"
+import type { LucideIcon } from "lucide-react"
+import { UtensilsCrossed, Store, Landmark, Monitor, Building2, HeartPulse, Factory, Briefcase } from "lucide-react"
 
 export function WorkSection() {
   const { ref, isVisible } = useReveal(0.3)
@@ -29,42 +31,42 @@ export function WorkSection() {
           {(() => {
             const industries = [
               {
-                number: "01",
+                icon: UtensilsCrossed,
                 title: "Hospitality & Tourism",
                 category: "Seasonal onboarding, service standards, frontline readiness",
               },
               {
-                number: "02",
+                icon: Store,
                 title: "Retail & Multi-Site",
                 category: "Store consistency, product knowledge, area manager capability",
               },
               {
-                number: "03",
+                icon: Landmark,
                 title: "Financial Services",
                 category: "Regulatory compliance, adviser development, customer outcomes",
               },
               {
-                number: "04",
+                icon: Monitor,
                 title: "Technology & Digital",
                 category: "Customer success, technical onboarding, remote team alignment",
               },
               {
-                number: "05",
+                icon: Building2,
                 title: "Public Sector",
                 category: "Compliance that lands, service standards, policy rollout at speed",
               },
               {
-                number: "06",
+                icon: HeartPulse,
                 title: "Healthcare & Life Sciences",
                 category: "Patient safety, clinical compliance, continuing professional development",
               },
               {
-                number: "07",
+                icon: Factory,
                 title: "Manufacturing & Logistics",
                 category: "Safety-critical training, operational SOPs, supply chain readiness",
               },
               {
-                number: "08",
+                icon: Briefcase,
                 title: "Professional Services",
                 category: "Methodology adoption, client delivery standards, knowledge sharing at scale",
               },
@@ -104,7 +106,7 @@ function ProjectCard({
   index,
   isVisible,
 }: {
-  project: { number: string; title: string; category: string }
+  project: { icon: LucideIcon; title: string; category: string }
   index: number
   isVisible: boolean
 }) {
@@ -118,12 +120,10 @@ function ProjectCard({
 
   return (
     <div
-      className={`group flex items-baseline gap-3 border-b border-foreground/10 py-3 transition-all duration-700 hover:border-foreground/20 md:gap-4 md:py-4 ${getRevealClass()}`}
+      className={`group flex items-center gap-3 border-b border-foreground/10 py-3 transition-all duration-700 hover:border-foreground/20 md:gap-4 md:py-4 ${getRevealClass()}`}
       style={{ transitionDelay: `${index * 150}ms` }}
     >
-      <span className="font-mono text-xs text-foreground/30 transition-colors group-hover:text-foreground/50 md:text-sm">
-        {project.number}
-      </span>
+      <project.icon className="h-8 w-8 shrink-0 text-foreground/30 transition-colors group-hover:text-foreground/50 md:h-10 md:w-10" />
       <div>
         <h3 className="mb-0.5 font-serif text-lg uppercase text-foreground transition-transform duration-300 group-hover:translate-x-2 md:text-xl lg:text-2xl">
           {project.title}
