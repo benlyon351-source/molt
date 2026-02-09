@@ -242,7 +242,7 @@ export default function Home() {
         </button>
 
         <div className="hidden items-center gap-8 md:flex">
-          {["Home", "Proof", "Why MOLT", "About", "Contact"].map((item, index) => (
+          {["Home", "How We Work", "Results", "About", "Contact"].map((item, index) => (
             <button
               key={item}
               onClick={() => scrollToSection(index)}
@@ -276,17 +276,17 @@ export default function Home() {
         {/* Hero Section */}
         <section className="flex min-h-screen w-screen shrink-0 flex-col justify-end px-6 pb-16 pt-24 md:px-12 md:pb-24">
           <div className="max-w-3xl">
-            <div className="mb-4 inline-block animate-in fade-in slide-in-from-bottom-4 rounded-full border border-foreground/20 bg-foreground/15 px-4 py-1.5 backdrop-blur-md duration-700">
+            <div className="mb-4 mt-16 inline-block animate-in fade-in slide-in-from-bottom-4 rounded-full border border-foreground/20 bg-foreground/15 px-4 py-1.5 backdrop-blur-md duration-700 md:mt-0">
               <p className="font-mono text-xs text-foreground/90">Next-generation e-learning</p>
             </div>
-            <h1 className="mb-6 animate-in fade-in slide-in-from-bottom-8 font-serif text-6xl uppercase leading-[1.1] tracking-tight text-foreground duration-1000 md:text-7xl lg:text-8xl">
+            <h1 className="mb-4 animate-in fade-in slide-in-from-bottom-8 font-serif text-4xl uppercase leading-[1.1] tracking-tight text-foreground duration-1000 md:text-5xl lg:text-6xl">
               <span className="text-balance">
                 Shed the forgettable.
                 <br />
                 Grow your people.
               </span>
             </h1>
-            <p className="mb-8 max-w-xl animate-in fade-in slide-in-from-bottom-4 text-lg leading-relaxed text-foreground/90 duration-1000 delay-200 md:text-xl">
+            <p className="mb-8 max-w-lg animate-in fade-in slide-in-from-bottom-4 text-base leading-relaxed text-foreground/90 duration-1000 delay-200 md:text-lg">
               <span className="text-pretty">
                 Most corporate training gets clicked through and forgotten. MOLT changes that — bespoke, expert-designed
                 e-learning that delivers on your business objectives, engages like social content, and delivered x10
@@ -317,8 +317,8 @@ export default function Home() {
           </div>
         </section>
 
-        <WorkSection />
         <ServicesSection />
+        <WorkSection />
         <AboutSection scrollToSection={scrollToSection} />
         <ContactSection />
       </div>

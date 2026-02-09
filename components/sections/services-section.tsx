@@ -17,31 +17,31 @@ export function ServicesSection() {
           }`}
         >
           <h2 className="mb-2 font-serif text-5xl uppercase tracking-tight text-foreground md:text-6xl lg:text-7xl">
-            Why MOLT
+            How We Work
           </h2>
-          <p className="font-mono text-sm text-foreground/60 md:text-base">/ Learning that fits your business</p>
+          <p className="font-mono text-sm text-foreground/60 md:text-base">/ From challenge to launch, at speed</p>
         </div>
 
         <div className="grid gap-8 md:grid-cols-2 md:gap-x-16 md:gap-y-12 lg:gap-x-24">
           {[
             {
-              title: "Designed for outcomes",
-              description: "Every curriculum mapped to the performance shifts that matter to your organisation, designed by practitioners who deliver measurable results.",
+              title: "Define",
+              description: "We start with a focused scoping session — what needs to change, for whom, and what good looks like when the learning lands.",
               direction: "top",
             },
             {
-              title: "Engaging enough for YouTube",
-              description: "Short-form, video-led, scenario-driven. Content built using formats your people are already conditioned to watch.",
+              title: "Design",
+              description: "We generate a curriculum blueprint mapped to business outcomes. You review and refine with us.",
               direction: "right",
             },
             {
-              title: "Truly bespoke",
-              description: "We co-create with you — your context, your terminology, your people on screen as AI avatars.",
+              title: "Produce",
+              description: "Scripts, interactive modules, and video lessons featuring AI avatars of your own people. Fast and unmistakably yours.",
               direction: "left",
             },
             {
-              title: "Ready to evolve",
-              description: "AI-powered workflow means we launch fast and keep content current as the world changes.",
+              title: "Deploy",
+              description: "Packaged for your LMS. Assign to learners, track completion, iterate as priorities change.",
               direction: "bottom",
             },
           ].map((service, i) => (
