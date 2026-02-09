@@ -10,7 +10,10 @@ img = Image.new("RGB", (size, size), MOLT_BLACK)
 draw = ImageDraw.Draw(img)
 
 # Load Moulay-Bold font at a large size
-font = ImageFont.truetype("public/fonts/Moulay-Bold.ttf", 360)
+import os
+project_root = "/vercel/share/v0-project"
+font_path = os.path.join(project_root, "public", "fonts", "Moulay-Bold.ttf")
+font = ImageFont.truetype(font_path, 360)
 
 # Measure the "M" glyph
 text = "M"
@@ -25,5 +28,6 @@ y = (size - text_height) / 2 - bbox[1]
 draw.text((x, y), text, fill=MOLT_WHITE, font=font)
 
 # Save as PNG (Next.js app/icon.png is auto-detected as favicon)
-img.save("app/icon.png", "PNG")
-print("Favicon saved to app/icon.png")
+output_path = os.path.join(project_root, "app", "icon.png")
+img.save(output_path, "PNG")
+print(f"Favicon saved to {output_path}")
