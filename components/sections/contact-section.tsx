@@ -274,8 +274,8 @@ export function ContactSection() {
                   <MagneticButton
                     variant="primary"
                     size="lg"
-                    className="w-full disabled:opacity-50"
-                    onClick={isSubmitting ? undefined : undefined}
+                    className="w-full"
+                    disabled={isSubmitting}
                   >
                     {isSubmitting ? "Sending..." : "Book a scoping session"}
                   </MagneticButton>

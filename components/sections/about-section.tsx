@@ -89,9 +89,6 @@ export function AboutSection({ scrollToSection }: { scrollToSection?: (index: nu
           <MagneticButton size="lg" variant="primary" onClick={() => scrollToSection?.(4)}>
             Book a scoping session
           </MagneticButton>
-          <MagneticButton size="lg" variant="secondary" onClick={() => scrollToSection?.(2)}>
-            Explore Learning Solutions
-          </MagneticButton>
         </div>
       </div>
     </section>

@@ -86,9 +86,9 @@
 
 @theme inline {
   /* optional: --font-sans, --font-serif, --font-mono if they are applied in the layout.tsx */
-  --font-sans: "ApercuPro", "Helvetica Neue", Arial, sans-serif;
-  --font-mono: "ApercuMonoProRegular", "Courier New", monospace;
-  --font-serif: "Moulay-Bold", "Arial Black", sans-serif;
+  --font-sans: var(--font-apercu-pro), "Helvetica Neue", Arial, sans-serif;
+  --font-mono: var(--font-apercu-mono), "Courier New", monospace;
+  --font-serif: var(--font-moulay), "Arial Black", sans-serif;
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);

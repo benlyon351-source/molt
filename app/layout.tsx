@@ -4,23 +4,26 @@ import localFont from "next/font/local"
 import { Analytics } from "@vercel/analytics/next"
 import "./globals.css"
 
-const _apercuPro = localFont({
+const apercuPro = localFont({
   src: "../public/fonts/ApercuPro.ttf",
   weight: "400",
   style: "normal",
   display: "swap",
+  variable: "--font-apercu-pro",
 })
-const _apercuMonoPro = localFont({
+const apercuMonoPro = localFont({
   src: "../public/fonts/ApercuMonoProRegular.ttf",
   weight: "400",
   style: "normal",
   display: "swap",
+  variable: "--font-apercu-mono",
 })
-const _moulay = localFont({
+const moulay = localFont({
   src: "../public/fonts/Moulay-Bold.ttf",
   weight: "700",
   style: "normal",
   display: "swap",
+  variable: "--font-moulay",
 })
 
 export const metadata: Metadata = {
@@ -74,7 +77,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`font-sans antialiased`}>
+      <body className={`${apercuPro.variable} ${apercuMonoPro.variable} ${moulay.variable} font-sans antialiased`}>
         {children}
         <Analytics />
       </body>
