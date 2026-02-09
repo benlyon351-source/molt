@@ -37,6 +37,20 @@ export const metadata: Metadata = {
     "MOLT",
   ],
   authors: [{ name: "MOLT" }],
+  icons: {
+    icon: [
+      { url: "/favicon-96x96.png", sizes: "96x96", type: "image/png" },
+      { url: "/favicon.svg", type: "image/svg+xml" },
+      { url: "/favicon.ico", sizes: "any" },
+    ],
+    apple: [
+      { url: "/apple-touch-icon.png", sizes: "180x180" },
+    ],
+  },
+  manifest: "/site.webmanifest",
+  other: {
+    "apple-mobile-web-app-title": "MOLT",
+  },
   openGraph: {
     title: "MOLT | Bespoke e-Learning",
     description:
