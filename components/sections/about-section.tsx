@@ -9,14 +9,14 @@ export function AboutSection({ scrollToSection }: { scrollToSection?: (index: nu
   return (
     <section
       ref={ref}
-      className="flex w-full items-center px-4 py-20 md:h-screen md:w-screen md:shrink-0 md:snap-start md:px-12 md:py-20 lg:px-16"
+      className="flex w-full items-center px-4 py-20 md:h-screen md:w-screen md:shrink-0 md:snap-start md:items-start md:px-12 md:pt-32 md:pb-16 lg:px-16"
     >
       <div className="mx-auto w-full max-w-7xl">
-        <div className="grid gap-8 md:grid-cols-2 md:gap-16 lg:gap-24">
+        <div className="grid gap-8 md:grid-cols-2 md:gap-12 lg:gap-16">
           {/* Left side - Story */}
           <div>
             <div
-              className={`mb-6 transition-all duration-700 md:mb-12 ${
+              className={`mb-6 transition-all duration-700 md:mb-8 ${
                 isVisible ? "translate-y-0 opacity-100" : "-translate-y-12 opacity-0"
               }`}
             >
@@ -30,27 +30,32 @@ export function AboutSection({ scrollToSection }: { scrollToSection?: (index: nu
             </div>
 
             <div
-              className={`space-y-3 transition-all duration-700 md:space-y-4 ${
+              className={`space-y-3 transition-all duration-700 md:space-y-3 ${
                 isVisible ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
               }`}
               style={{ transitionDelay: "200ms" }}
             >
-              <p className="max-w-md font-sans text-sm leading-relaxed text-foreground md:text-lg">
-                Founded by ex-management consultants who spent years watching training fail to land. We built MOLT to
-                fix that — combining practitioner-led learning design with an AI-powered production workflow.
+              <p className="max-w-md font-sans text-sm leading-relaxed text-foreground md:text-base">
+                Founded by ex-management consultants who spent years inside complex organisations — designing capability
+                programmes, leading change, and watching training fail to engage.
               </p>
-              <p className="max-w-md font-sans text-sm leading-relaxed text-foreground md:text-lg">
-                The result: bespoke e-learning that launches in weeks, not months — and costs less than you'd expect.
+              <p className="max-w-md font-sans text-sm leading-relaxed text-foreground md:text-base">
+                Most e-learning gets clicked through, not absorbed. Generic, slow to build, and disconnected from how
+                people actually learn today.
+              </p>
+              <p className="max-w-md font-sans text-sm leading-relaxed text-foreground md:text-base">
+                MOLT exists to fix that.
               </p>
             </div>
           </div>
 
           {/* Right side - Stats with creative layout */}
-          <div className="flex flex-col justify-center space-y-6 md:space-y-12">
+          <div className="flex flex-col justify-center space-y-6 md:space-y-4">
             {[
-              { value: "150+", label: "Projects", sublabel: "Delivered worldwide", direction: "right" },
-              { value: "8", label: "Years", sublabel: "Of innovation", direction: "left" },
-              { value: "12", label: "Awards", sublabel: "Industry recognition", direction: "right" },
+              { value: "100%", label: "Outcome-mapped", sublabel: "Every programme tied to the performance shifts your business needs.", direction: "right" },
+              { value: "< 6s", label: "To hook a learner", sublabel: "We design for how your people actually consume content today.", direction: "left" },
+              { value: "1:1", label: "Co-created", sublabel: "Your language, your context, your people on screen as AI avatars.", direction: "right" },
+              { value: "1\u20134 wks", label: "Avg. to launch", sublabel: "AI-powered workflow. Speed without compromising depth.", direction: "left" },
             ].map((stat, i) => {
               const getRevealClass = () => {
                 if (!isVisible) {
@@ -69,7 +74,7 @@ export function AboutSection({ scrollToSection }: { scrollToSection?: (index: nu
                     maxWidth: i % 2 === 0 ? "100%" : "85%",
                   }}
                 >
-                  <div className="text-3xl font-light text-foreground md:text-6xl lg:text-7xl">{stat.value}</div>
+                  <div className="whitespace-nowrap text-3xl font-light text-foreground md:text-4xl lg:text-5xl">{stat.value}</div>
                   <div>
                     <div className="font-sans text-base font-light text-foreground md:text-xl">{stat.label}</div>
                     <div className="font-mono text-xs text-foreground/60">{stat.sublabel}</div>
@@ -81,7 +86,7 @@ export function AboutSection({ scrollToSection }: { scrollToSection?: (index: nu
         </div>
 
         <div
-          className={`mt-8 hidden flex-wrap gap-3 transition-all duration-700 md:mt-16 md:flex md:gap-4 ${
+          className={`mt-8 hidden flex-wrap gap-3 transition-all duration-700 md:mt-6 md:flex md:gap-4 ${
             isVisible ? "translate-y-0 opacity-100" : "translate-y-12 opacity-0"
           }`}
           style={{ transitionDelay: "750ms" }}
