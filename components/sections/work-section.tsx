@@ -10,7 +10,7 @@ export function WorkSection() {
   return (
     <section
       ref={ref}
-      className="flex w-full items-center px-6 py-20 md:h-screen md:w-screen md:shrink-0 md:snap-start md:px-12 md:py-20 lg:px-16"
+      className="flex w-full items-center px-6 py-20 md:h-screen md:w-screen md:shrink-0 md:snap-start md:px-12 md:pt-28 md:pb-12 lg:px-16"
     >
       <div className="mx-auto w-full max-w-7xl">
         <div
