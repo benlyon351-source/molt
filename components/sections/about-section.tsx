@@ -12,11 +12,11 @@ export function AboutSection({ scrollToSection }: { scrollToSection?: (index: nu
       className="flex w-full items-center px-4 py-20 md:h-screen md:w-screen md:shrink-0 md:snap-start md:px-12 md:py-20 lg:px-16"
     >
       <div className="mx-auto w-full max-w-7xl">
-        <div className="grid gap-8 md:grid-cols-2 md:gap-16 lg:gap-24">
+        <div className="grid gap-8 md:grid-cols-2 md:gap-12 lg:gap-16">
           {/* Left side - Story */}
           <div>
             <div
-              className={`mb-6 transition-all duration-700 md:mb-12 ${
+              className={`mb-6 transition-all duration-700 md:mb-8 ${
                 isVisible ? "translate-y-0 opacity-100" : "-translate-y-12 opacity-0"
               }`}
             >
@@ -30,7 +30,7 @@ export function AboutSection({ scrollToSection }: { scrollToSection?: (index: nu
             </div>
 
             <div
-              className={`space-y-3 transition-all duration-700 md:space-y-4 ${
+              className={`space-y-3 transition-all duration-700 md:space-y-3 ${
                 isVisible ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
               }`}
               style={{ transitionDelay: "200ms" }}
@@ -50,7 +50,7 @@ export function AboutSection({ scrollToSection }: { scrollToSection?: (index: nu
           </div>
 
           {/* Right side - Stats with creative layout */}
-          <div className="flex flex-col justify-center space-y-6 md:space-y-8">
+          <div className="flex flex-col justify-center space-y-6 md:space-y-5">
             {[
               { value: "100%", label: "Outcome-mapped", sublabel: "Every programme tied to the performance shifts your business needs.", direction: "right" },
               { value: "< 6s", label: "To hook a learner", sublabel: "We design for how your people actually consume content today.", direction: "left" },
@@ -74,7 +74,7 @@ export function AboutSection({ scrollToSection }: { scrollToSection?: (index: nu
                     maxWidth: i % 2 === 0 ? "100%" : "85%",
                   }}
                 >
-                  <div className="text-3xl font-light text-foreground md:text-6xl lg:text-7xl">{stat.value}</div>
+                  <div className="whitespace-nowrap text-3xl font-light text-foreground md:text-5xl lg:text-6xl">{stat.value}</div>
                   <div>
                     <div className="font-sans text-base font-light text-foreground md:text-xl">{stat.label}</div>
                     <div className="font-mono text-xs text-foreground/60">{stat.sublabel}</div>
@@ -86,7 +86,7 @@ export function AboutSection({ scrollToSection }: { scrollToSection?: (index: nu
         </div>
 
         <div
-          className={`mt-8 hidden flex-wrap gap-3 transition-all duration-700 md:mt-16 md:flex md:gap-4 ${
+          className={`mt-8 hidden flex-wrap gap-3 transition-all duration-700 md:mt-8 md:flex md:gap-4 ${
             isVisible ? "translate-y-0 opacity-100" : "translate-y-12 opacity-0"
           }`}
           style={{ transitionDelay: "750ms" }}
