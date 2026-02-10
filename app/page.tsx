@@ -1,7 +1,6 @@
 "use client"
 
-import { Shader, ChromaFlow } from "shaders/react"
-import { MeshGradient } from "@paper-design/shaders-react"
+import dynamic from "next/dynamic"
 import { CustomCursor } from "@/components/custom-cursor"
 import { GrainOverlay } from "@/components/grain-overlay"
 import { WorkSection } from "@/components/sections/work-section"
@@ -12,15 +11,17 @@ import { MagneticButton } from "@/components/magnetic-button"
 import { useRef, useEffect, useState, useCallback } from "react"
 import { Menu, X } from "lucide-react"
 
+const ShaderBackground = dynamic(() => import("@/components/shader-background"), {
+  ssr: false,
+})
+
 export default function Home() {
   const scrollContainerRef = useRef<HTMLDivElement>(null)
   const [currentSection, setCurrentSection] = useState(0)
-  const [isLoaded, setIsLoaded] = useState(false)
   const [isMobile, setIsMobile] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
   const touchStartY = useRef(0)
   const touchStartX = useRef(0)
-  const shaderContainerRef = useRef<HTMLDivElement>(null)
   const scrollThrottleRef = useRef<number>()
 
   // Detect mobile breakpoint
@@ -30,36 +31,6 @@ export default function Home() {
     onChange(mql)
     mql.addEventListener("change", onChange)
     return () => mql.removeEventListener("change", onChange)
-  }, [])
-
-  useEffect(() => {
-    const checkShaderReady = () => {
-      if (shaderContainerRef.current) {
-        const canvas = shaderContainerRef.current.querySelector("canvas")
-        if (canvas && canvas.width > 0 && canvas.height > 0) {
-          setIsLoaded(true)
-          return true
-        }
-      }
-      return false
-    }
-
-    if (checkShaderReady()) return
-
-    const intervalId = setInterval(() => {
-      if (checkShaderReady()) {
-        clearInterval(intervalId)
-      }
-    }, 100)
-
-    const fallbackTimer = setTimeout(() => {
-      setIsLoaded(true)
-    }, 1500)
-
-    return () => {
-      clearInterval(intervalId)
-      clearTimeout(fallbackTimer)
-    }
   }, [])
 
   const scrollToSection = useCallback(
@@ -214,62 +185,15 @@ export default function Home() {
       {!isMobile && <CustomCursor />}
       <GrainOverlay />
 
-      <div
-        ref={shaderContainerRef}
-        className={`fixed inset-0 z-0 transition-opacity duration-700 ${isLoaded ? "opacity-100" : "opacity-0"}`}
-        style={{ contain: "strict" }}
-      >
-        {/* Base layer: MeshGradient with full MOLT palette */}
-        <MeshGradient
-          colors={[
-            "#070501", // MOLT BLACK
-            "#191411", // MOLT BARK
-            "#5d5446", // TAUPE
-            "#747f8c", // ICE
-            "#303c4b", // WATER
-            "#915a2e", // CLAY
-            "#3b4a36", // MOSS
-            "#4fb1c5", // BOLT
-          ]}
-          distortion={0.4}
-          swirl={0.15}
-          grainMixer={0.05}
-          grainOverlay={0}
-          speed={0.15}
-          style={{ position: "absolute", inset: 0, width: "100%", height: "100%" }}
-        />
-        {/* Mouse-reactive layer on top */}
-        <div className="absolute inset-0" style={{ mixBlendMode: "screen" }}>
-          <Shader className="h-full w-full">
-            <ChromaFlow
-              baseColor="#070501"
-              upColor="#4fb1c5"
-              downColor="#747f8c"
-              leftColor="#915a2e"
-              rightColor="#303c4b"
-              intensity={0.6}
-              radius={1.6}
-              momentum={25}
-              maskType="alpha"
-              opacity={0.7}
-            />
-          </Shader>
-        </div>
-        {/* Dark overlay to deepen the overall look */}
-        <div className="absolute inset-0 bg-[#070501]/40" />
-      </div>
+      <ShaderBackground />
 
       {/* Mobile gradient fade under navbar */}
       <div
-        className={`pointer-events-none fixed left-0 right-0 top-0 z-40 h-24 bg-gradient-to-b from-background via-background/60 to-transparent transition-opacity duration-700 md:hidden ${
-          isLoaded ? "opacity-100" : "opacity-0"
-        }`}
+        className="pointer-events-none fixed left-0 right-0 top-0 z-40 h-24 bg-gradient-to-b from-background via-background/60 to-transparent md:hidden"
       />
 
       <nav
-        className={`fixed left-0 right-0 top-0 z-50 flex items-center justify-between px-6 py-4 transition-opacity duration-700 md:px-12 md:py-6 ${
-          isLoaded ? "opacity-100" : "opacity-0"
-        }`}
+        className="fixed left-0 right-0 top-0 z-50 flex items-center justify-between px-6 py-4 md:px-12 md:py-6"
       >
         <button
           onClick={() => scrollToSection(0)}
@@ -279,6 +203,8 @@ export default function Home() {
             src="/images/molt-logo.gif"
             alt="MOLT"
             className="h-10 w-auto md:h-14"
+            width={56}
+            height={56}
           />
         </button>
 
@@ -329,6 +255,8 @@ export default function Home() {
             src="/images/molt-logo.gif"
             alt="MOLT"
             className="h-10 w-auto"
+            width={40}
+            height={40}
           />
           <button
             onClick={() => setMenuOpen(false)}
@@ -370,9 +298,7 @@ export default function Home() {
       <div
         ref={scrollContainerRef}
         data-scroll-container
-        className={`relative z-10 transition-opacity duration-700 ${
-          isLoaded ? "opacity-100" : "opacity-0"
-        } flex h-screen flex-col overflow-y-auto overflow-x-hidden md:flex-row md:overflow-x-auto md:overflow-y-hidden`}
+        className="relative z-10 flex h-screen flex-col overflow-y-auto overflow-x-hidden md:flex-row md:overflow-x-auto md:overflow-y-hidden"
         style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
       >
         {/* Hero Section */}
