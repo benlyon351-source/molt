@@ -130,7 +130,11 @@
 @layer base {
   * {
     @apply border-border outline-ring/50;
-    cursor: none;
+  }
+  @media (pointer: fine) {
+    * {
+      cursor: none;
+    }
   }
   body {
     @apply bg-background text-foreground;
