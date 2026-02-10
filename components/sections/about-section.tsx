@@ -9,7 +9,7 @@ export function AboutSection({ scrollToSection }: { scrollToSection?: (index: nu
   return (
     <section
       ref={ref}
-      className="flex w-full items-center px-4 py-20 md:h-screen md:w-screen md:shrink-0 md:snap-start md:px-12 md:pt-28 md:pb-12 lg:px-16"
+      className="flex w-full items-center px-4 py-20 md:h-screen md:w-screen md:shrink-0 md:snap-start md:items-start md:px-12 md:pt-32 md:pb-16 lg:px-16"
     >
       <div className="mx-auto w-full max-w-7xl">
         <div className="grid gap-8 md:grid-cols-2 md:gap-12 lg:gap-16">
@@ -35,22 +35,22 @@ export function AboutSection({ scrollToSection }: { scrollToSection?: (index: nu
               }`}
               style={{ transitionDelay: "200ms" }}
             >
-              <p className="max-w-md font-sans text-sm leading-relaxed text-foreground md:text-lg">
+              <p className="max-w-md font-sans text-sm leading-relaxed text-foreground md:text-base">
                 Founded by ex-management consultants who spent years inside complex organisations — designing capability
                 programmes, leading change, and watching training fail to engage.
               </p>
-              <p className="max-w-md font-sans text-sm leading-relaxed text-foreground md:text-lg">
+              <p className="max-w-md font-sans text-sm leading-relaxed text-foreground md:text-base">
                 Most e-learning gets clicked through, not absorbed. Generic, slow to build, and disconnected from how
                 people actually learn today.
               </p>
-              <p className="max-w-md font-sans text-sm leading-relaxed text-foreground md:text-lg">
+              <p className="max-w-md font-sans text-sm leading-relaxed text-foreground md:text-base">
                 MOLT exists to fix that.
               </p>
             </div>
           </div>
 
           {/* Right side - Stats with creative layout */}
-          <div className="flex flex-col justify-center space-y-6 md:space-y-5">
+          <div className="flex flex-col justify-center space-y-6 md:space-y-4">
             {[
               { value: "100%", label: "Outcome-mapped", sublabel: "Every programme tied to the performance shifts your business needs.", direction: "right" },
               { value: "< 6s", label: "To hook a learner", sublabel: "We design for how your people actually consume content today.", direction: "left" },
@@ -74,7 +74,7 @@ export function AboutSection({ scrollToSection }: { scrollToSection?: (index: nu
                     maxWidth: i % 2 === 0 ? "100%" : "85%",
                   }}
                 >
-                  <div className="whitespace-nowrap text-3xl font-light text-foreground md:text-5xl lg:text-6xl">{stat.value}</div>
+                  <div className="whitespace-nowrap text-3xl font-light text-foreground md:text-4xl lg:text-5xl">{stat.value}</div>
                   <div>
                     <div className="font-sans text-base font-light text-foreground md:text-xl">{stat.label}</div>
                     <div className="font-mono text-xs text-foreground/60">{stat.sublabel}</div>
@@ -86,7 +86,7 @@ export function AboutSection({ scrollToSection }: { scrollToSection?: (index: nu
         </div>
 
         <div
-          className={`mt-8 hidden flex-wrap gap-3 transition-all duration-700 md:mt-8 md:flex md:gap-4 ${
+          className={`mt-8 hidden flex-wrap gap-3 transition-all duration-700 md:mt-6 md:flex md:gap-4 ${
             isVisible ? "translate-y-0 opacity-100" : "translate-y-12 opacity-0"
           }`}
           style={{ transitionDelay: "750ms" }}

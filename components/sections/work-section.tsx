@@ -10,7 +10,7 @@ export function WorkSection() {
   return (
     <section
       ref={ref}
-      className="flex w-full items-center px-6 py-20 md:h-screen md:w-screen md:shrink-0 md:snap-start md:px-12 md:pt-28 md:pb-12 lg:px-16"
+      className="flex w-full items-center px-6 py-20 md:h-screen md:w-screen md:shrink-0 md:snap-start md:items-start md:px-12 md:pt-32 md:pb-16 lg:px-16"
     >
       <div className="mx-auto w-full max-w-7xl">
         <div
@@ -120,12 +120,12 @@ function ProjectCard({
 
   return (
     <div
-      className={`group flex items-center gap-3 border-b border-foreground/10 py-3 transition-all duration-700 hover:border-foreground/20 md:gap-4 md:py-4 ${getRevealClass()}`}
+      className={`group flex items-center gap-3 border-b border-foreground/10 py-3 transition-all duration-700 hover:border-foreground/20 md:gap-4 md:py-3 ${getRevealClass()}`}
       style={{ transitionDelay: `${index * 150}ms` }}
     >
-      <project.icon className="h-8 w-8 shrink-0 text-foreground/30 transition-colors group-hover:text-foreground/50 md:h-10 md:w-10" />
+      <project.icon className="h-8 w-8 shrink-0 text-foreground/30 transition-colors group-hover:text-foreground/50 md:h-8 md:w-8" />
       <div>
-        <h3 className="mb-0.5 font-serif text-lg uppercase text-foreground transition-transform duration-300 group-hover:translate-x-2 md:text-xl lg:text-2xl">
+        <h3 className="mb-0.5 font-serif text-lg uppercase text-foreground transition-transform duration-300 group-hover:translate-x-2 md:text-lg lg:text-xl">
           {project.title}
         </h3>
         <p className="font-mono text-xs leading-relaxed text-foreground/70 md:text-sm">{project.category}</p>

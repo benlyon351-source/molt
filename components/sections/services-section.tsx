@@ -8,11 +8,11 @@ export function ServicesSection() {
   return (
     <section
       ref={ref}
-      className="flex w-full items-center px-6 py-20 md:h-screen md:w-screen md:shrink-0 md:snap-start md:px-12 md:py-20 lg:px-16"
+      className="flex w-full items-center px-6 py-20 md:h-screen md:w-screen md:shrink-0 md:snap-start md:items-start md:px-12 md:pt-32 md:pb-16 lg:px-16"
     >
       <div className="mx-auto w-full max-w-7xl">
         <div
-          className={`mb-12 transition-all duration-700 md:mb-16 ${
+          className={`mb-12 transition-all duration-700 md:mb-10 ${
             isVisible ? "translate-y-0 opacity-100" : "-translate-y-12 opacity-0"
           }`}
         >
