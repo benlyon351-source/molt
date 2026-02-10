@@ -36,21 +36,26 @@ export function AboutSection({ scrollToSection }: { scrollToSection?: (index: nu
               style={{ transitionDelay: "200ms" }}
             >
               <p className="max-w-md font-sans text-sm leading-relaxed text-foreground md:text-lg">
-                Founded by ex-management consultants who spent years watching training fail to land. We built MOLT to
-                fix that — combining practitioner-led learning design with an AI-powered production workflow.
+                Founded by ex-management consultants who spent years inside complex organisations — designing capability
+                programmes, leading change, and watching training fail to engage.
               </p>
               <p className="max-w-md font-sans text-sm leading-relaxed text-foreground md:text-lg">
-                The result: bespoke e-learning that launches in weeks, not months — and costs less than you'd expect.
+                Most e-learning gets clicked through, not absorbed. Generic, slow to build, and disconnected from how
+                people actually learn today.
+              </p>
+              <p className="max-w-md font-sans text-sm leading-relaxed text-foreground md:text-lg">
+                MOLT exists to fix that.
               </p>
             </div>
           </div>
 
           {/* Right side - Stats with creative layout */}
-          <div className="flex flex-col justify-center space-y-6 md:space-y-12">
+          <div className="flex flex-col justify-center space-y-6 md:space-y-8">
             {[
-              { value: "150+", label: "Projects", sublabel: "Delivered worldwide", direction: "right" },
-              { value: "8", label: "Years", sublabel: "Of innovation", direction: "left" },
-              { value: "12", label: "Awards", sublabel: "Industry recognition", direction: "right" },
+              { value: "100%", label: "Outcome-mapped", sublabel: "Every programme tied to the performance shifts your business needs.", direction: "right" },
+              { value: "< 6s", label: "To hook a learner", sublabel: "We design for how your people actually consume content today.", direction: "left" },
+              { value: "1:1", label: "Co-created", sublabel: "Your language, your context, your people on screen as AI avatars.", direction: "right" },
+              { value: "1\u20134 wks", label: "Avg. to launch", sublabel: "AI-powered workflow. Speed without compromising depth.", direction: "left" },
             ].map((stat, i) => {
               const getRevealClass = () => {
                 if (!isVisible) {
