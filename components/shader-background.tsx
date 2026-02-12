@@ -45,17 +45,17 @@ export default function ShaderBackground() {
         colors={[
           "#070501", // MOLT BLACK
           "#191411", // MOLT BARK
-          "#5d5446", // TAUPE
-          "#747f8c", // ICE
+          "#3d3a30", // TAUPE
+          "#4a5260", // ICE
           "#303c4b", // WATER
           "#915a2e", // CLAY
           "#3b4a36", // MOSS
           "#4fb1c5", // BOLT
         ]}
         distortion={0.4}
-        swirl={0.15}
-        grainMixer={0.05}
-        grainOverlay={0}
+        swirl={0.07}
+        grainMixer={0.18}
+        grainOverlay={0.10}
         speed={0.15}
         style={{ position: "absolute", inset: 0, width: "100%", height: "100%" }}
       />
@@ -65,19 +65,19 @@ export default function ShaderBackground() {
           <ChromaFlow
             baseColor="#070501"
             upColor="#4fb1c5"
-            downColor="#747f8c"
+            downColor="#4a5260"
             leftColor="#915a2e"
             rightColor="#303c4b"
-            intensity={0.6}
-            radius={1.6}
-            momentum={25}
+            intensity={0.35}
+            radius={1.1}
+            momentum={35}
             maskType="alpha"
-            opacity={0.7}
+            opacity={0.4}
           />
         </Shader>
       </div>
       {/* Dark overlay to deepen the overall look */}
-      <div className="absolute inset-0 bg-[#070501]/40" />
+      <div className="absolute inset-0 bg-[#070501]/55" />
     </div>
   )
 }
