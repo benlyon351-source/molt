@@ -68,16 +68,16 @@ export default function ShaderBackground() {
             downColor="#4a5260"
             leftColor="#915a2e"
             rightColor="#303c4b"
-            intensity={0.35}
-            radius={1.1}
-            momentum={35}
+            intensity={0.50}
+            radius={1.4}
+            momentum={30}
             maskType="alpha"
-            opacity={0.4}
+            opacity={0.55}
           />
         </Shader>
       </div>
       {/* Dark overlay to deepen the overall look */}
-      <div className="absolute inset-0 bg-[#070501]/55" />
+      <div className="absolute inset-0 bg-[#070501]/60" />
     </div>
   )
 }
