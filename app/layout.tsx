@@ -91,6 +91,23 @@ export default function RootLayout({
             gtag('config', 'G-VFS95882TK');
           `}
         </Script>
+        <Script id="dealfront-leadfeeder" strategy="afterInteractive">
+          {`
+            (function(ss,ex){
+              window.ldfdr = window.ldfdr || function(){(ldfdr._q = ldfdr._q || []).push([].slice.call(arguments));};
+              (function(d,s){
+                var fs = d.getElementsByTagName(s)[0];
+                function ce(src){
+                  var cs = d.createElement(s);
+                  cs.src = src;
+                  cs.async = 1;
+                  fs.parentNode.insertBefore(cs, fs);
+                }
+                ce('https://sc.lfeeder.com/lftracker_v1_' + ss + (ex ? '_' + ex : '') + '.js');
+              })(document, 'script');
+            })('p1e024BE0JZ7GB6d');
+          `}
+        </Script>
         {children}
         <Analytics />
       </body>
